@@ -423,7 +423,7 @@
 
   .controls {
     display: grid;
-    grid-template-columns: minmax(180px, 280px) 1fr;
+    grid-template-columns: minmax(180px, 280px) minmax(0, 1fr);
     gap: 28px;
     align-items: start;
     background: rgba(255, 255, 255, 0.05);
@@ -715,7 +715,7 @@
       padding: 60px 16px 70px;
     }
     .controls {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       padding: 18px 18px;
       gap: 22px;
     }

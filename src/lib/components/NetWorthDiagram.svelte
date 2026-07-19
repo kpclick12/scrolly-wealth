@@ -58,7 +58,11 @@
   }
   .grid {
     display: grid;
-    grid-template-columns: 1fr auto 1fr auto 1fr;
+    /* Bare 1fr columns default to minmax(auto, 1fr): a nowrap dollar value
+       (.val below) can then force a column — and this whole diagram, and
+       the page around it — wider than the viewport. minmax(0, 1fr) lets
+       the columns shrink below that content-driven floor instead. */
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
     grid-template-rows: auto auto auto;
     column-gap: 10px;
     row-gap: 8px;
@@ -70,6 +74,7 @@
     height: 200px;
     width: 100%;
     max-width: 92px;
+    min-width: 0;
     display: flex;
     align-items: flex-end;
     background: var(--gridline);
@@ -108,7 +113,14 @@
     font-size: 16px;
     font-weight: 700;
     color: var(--text-primary);
+    min-width: 0;
+    max-width: 100%;
     white-space: nowrap;
+    /* Keep the whole number together whenever there's room (the normal
+       case), but allow an emergency mid-string break rather than pushing
+       the grid — and the page — wider than the viewport on a cramped,
+       large-font phone. */
+    overflow-wrap: anywhere;
   }
   .val.result {
     color: var(--ink-gold);

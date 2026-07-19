@@ -50,7 +50,7 @@
   {#if colTitle}<div class="col-title">{colTitle} →</div>{/if}
   <div class="wrap">
     {#if rowTitle}<div class="row-title">{rowTitle} ↓</div>{/if}
-    <div class="grid" style="grid-template-columns: auto repeat({cols.length}, 1fr);">
+    <div class="grid" style="grid-template-columns: auto repeat({cols.length}, minmax(0, 1fr));">
       <div class="corner"></div>
       {#each cols as col}
         <div class="col-label" class:dim={highlightCol != null && col !== highlightCol}>{col}</div>
@@ -122,6 +122,12 @@
     display: grid;
     gap: 3px;
     flex: 1;
+    /* .grid is a flex item of .wrap; flex items default to min-width:auto,
+       which would refuse to shrink below the combined max-content width of
+       every column's cell text (each cell's value, like "35.0%", has no
+       break opportunity). min-width:0 lets it shrink to fit instead of
+       forcing .wrap — and the page — wider than the viewport. */
+    min-width: 0;
   }
   .corner {
     width: 92px;
@@ -139,7 +145,13 @@
   .row-label {
     justify-content: flex-end;
     padding-right: 8px;
-    white-space: nowrap;
+    text-align: right;
+    /* Row labels (country names) sit in the grid's first "auto" column,
+       which sizes to its widest item's content — a nowrap label longer
+       than .corner's fixed width would keep growing that column (and this
+       component, and the page) at large font sizes instead of wrapping
+       within the space already reserved for it. */
+    overflow-wrap: break-word;
   }
   .col-label.dim,
   .row-label.dim {
@@ -154,6 +166,7 @@
     justify-content: center;
     animation: cell-in 0.45s ease backwards;
     transition: opacity 0.4s ease, outline-color 0.3s ease;
+    overflow: hidden;
   }
   .cell.hl {
     outline: 2.5px solid var(--series-red);
@@ -170,6 +183,11 @@
     font-size: 11px;
     font-variant-numeric: tabular-nums;
     color: var(--text-secondary);
+    /* Emergency mid-string break for a value like "35.0%" — it has no
+       space to wrap at, so without this a large-font phone would push the
+       cell's grid column (and the page) wider instead of just clipping
+       inside the cell's own bounds (.cell has overflow:hidden above). */
+    overflow-wrap: anywhere;
   }
   .cell-value.light {
     color: rgba(255, 255, 255, 0.92);

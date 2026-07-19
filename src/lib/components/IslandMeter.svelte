@@ -41,6 +41,7 @@
     display: flex;
     align-items: baseline;
     justify-content: space-between;
+    gap: 8px;
     margin-bottom: 6px;
   }
   .meter-label {
@@ -49,6 +50,10 @@
     letter-spacing: 0.1em;
     color: var(--text-muted);
     font-weight: 700;
+    /* Flex items default to min-width:auto — override so the label can
+       shrink/wrap instead of holding the row (and the meter, and the page)
+       open to its own unbreakable width on a cramped, large-font phone. */
+    min-width: 0;
   }
   .meter-value {
     font-family: var(--serif);
@@ -56,6 +61,7 @@
     font-weight: 700;
     color: var(--text-primary);
     font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
   }
   .meter-track {
     height: 14px;
