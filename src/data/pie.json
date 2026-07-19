@@ -1,0 +1,64 @@
+{
+  "worldGdp": {
+    "source": "Maddison Project Database, world GDP per capita, inflation-adjusted international dollars. Figures are approximate, rounded order-of-magnitude estimates for illustration, not precise historical statistics — pre-modern estimates in particular carry wide uncertainty.",
+    "series": [
+      {
+        "id": "gdp",
+        "label": "World GDP per capita",
+        "color": "var(--series-blue)",
+        "serie": [
+          { "x": "1", "y": 470 },
+          { "x": "1000", "y": 450 },
+          { "x": "1500", "y": 570 },
+          { "x": "1820", "y": 680 },
+          { "x": "1900", "y": 1300 },
+          { "x": "1950", "y": 2100 },
+          { "x": "2000", "y": 6000 },
+          { "x": "2020", "y": 15000 }
+        ]
+      }
+    ]
+  },
+  "wealthGrowth": {
+    "source": "Nominal totals: UBS/Credit Suisse Global Wealth Report, aggregate global household wealth in current USD (2000 and 2022). Real figures are an approximate illustrative index built from the same reports' commentary on real (inflation-adjusted) wealth growth per adult — an order-of-magnitude figure, not a precisely deflated series.",
+    "nominal": [
+      { "label": "2000", "value": 117, "color": "var(--series-blue)" },
+      { "label": "2022", "value": 454, "color": "var(--hero-gold)", "light": true }
+    ],
+    "real": [
+      { "label": "2000", "value": 100, "color": "var(--series-blue)" },
+      { "label": "2022", "value": 205, "color": "var(--hero-gold)", "light": true }
+    ]
+  },
+  "moneyIllusion": {
+    "source": "Conceptual illustration of the quantity theory of money (more currency chasing the same output raises prices) — not measured data for any specific country or episode.",
+    "tiles": [
+      { "value": "×2", "label": "Money printed into circulation" },
+      { "value": "×1", "label": "Goods and services actually produced" },
+      { "value": "×2", "label": "Average price level — inflation", "accent": true }
+    ]
+  },
+  "countryGrowth": {
+    "source": "UBS/Credit Suisse Global Wealth Report / Databook, median wealth per adult, USD, approximate historical estimates for 2000 and 2022.",
+    "series": [
+      {
+        "id": "china",
+        "label": "China",
+        "color": "var(--series-red)",
+        "serie": [
+          { "x": "2000", "y": 3000 },
+          { "x": "2022", "y": 27000 }
+        ]
+      },
+      {
+        "id": "us",
+        "label": "United States",
+        "color": "var(--series-blue)",
+        "serie": [
+          { "x": "2000", "y": 55000 },
+          { "x": "2022", "y": 108000 }
+        ]
+      }
+    ]
+  }
+}

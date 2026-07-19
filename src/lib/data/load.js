@@ -8,6 +8,7 @@ import pyramid from "../../data/pyramid.json";
 import thresholds from "../../data/thresholds.json";
 import concentration from "../../data/concentration.json";
 import wheel from "../../data/wheel.json";
+import pie from "../../data/pie.json";
 
 export const appData = {
   netWorth,
@@ -18,4 +19,5 @@ export const appData = {
   thresholds,
   concentration,
   wheel,
+  pie,
 };

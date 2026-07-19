@@ -71,9 +71,9 @@
   const waffleMode = $derived(currentStep === 3 ? "wealth" : "adults");
 </script>
 
-<section class="act" aria-label="Act 3: Wealth between countries" style="--act-accent: var(--series-violet);">
+<section class="act" aria-label="Act 4: Wealth between countries" style="--act-accent: var(--series-violet);">
   <div class="act-head">
-    <p class="act-kicker">Act Three</p>
+    <p class="act-kicker">Act Four</p>
     <h2>Wealth between countries</h2>
   </div>
 
