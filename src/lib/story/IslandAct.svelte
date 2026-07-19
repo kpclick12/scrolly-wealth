@@ -78,9 +78,8 @@
           </p>
         {:else if i === 3}
           <p>
-            The fifth islander seizes the cleared field and takes half of
-            everything grown there. What they do with that power decides
-            what comes next.
+            The fifth islander seizes the cleared field. What they do with
+            that power decides what comes next.
           </p>
           <div class="toggle-row" role="group" aria-label="What does the fifth islander do?">
             <button
@@ -111,42 +110,35 @@
           </div>
           {#if fifthState === "takes"}
             <p class="toggle-note">
-              Half of every harvest disappears into one pile. Output stalls,
-              then slides.
+              Half of every harvest disappears into one pile, and output
+              stalls. Keeping what you create is what keeps the pie growing.
             </p>
           {:else}
             <p class="toggle-note">
-              The fifth islander organizes the planting instead. Output
-              keeps climbing — everyone ends up with more.
+              Output keeps climbing and everyone ends up with more. Keeping
+              what you create is what keeps the pie growing.
             </p>
           {/if}
-          <p class="toggle-moral">
-            The lesson: rules that let people keep what they create are what
-            keep the pie growing.
-          </p>
         {:else if i === 4}
           <p>
-            Crops, tools, an entire season's food production — gone in an
-            evening. The island's wealth drops hard and fast. But the
-            knowledge of how to farm, fish and build never burned. That's
-            why the island rebuilds faster than it was built the first time.
+            Crops, tools, a season's food — gone in one evening. The
+            island's wealth drops hard and fast. But the knowledge of how to
+            farm, fish and build never burned, so it rebuilds faster than it
+            grew the first time.
           </p>
         {:else if i === 5}
           <p>
-            Wind, water, fire tamed into real power — one islander finds a
-            way to do far more work for far less effort than ever before.
-            The island's wealth passes its old peak and keeps climbing. The
-            pie was never fixed. It grows through knowledge, cooperation, and
-            the rules people choose.
+            Wind, water, fire tamed into power — one islander does far more
+            work for far less effort than ever. Wealth passes its old peak
+            and keeps climbing. The pie was never fixed — it grows through
+            knowledge and cooperation.
           </p>
         {:else if i === 6}
           <p>
-            The island has more food, tools and comfort than at any point in
-            its history — and still, one islander may own the most land,
-            the best equipment, the biggest inventions. A bigger pie says
-            nothing about how the slices are cut. Every island in the real
-            world ran this same story — with different rules, and different
-            luck. Scroll on.
+            More food, tools and comfort than ever — and still, one islander
+            may own the most land, the best equipment, the biggest
+            inventions. A bigger pie says nothing about how the slices are
+            cut. Scroll on.
           </p>
         {/if}
       </section>
@@ -220,9 +212,6 @@
   .toggle-note {
     font-style: italic;
     color: var(--text-secondary);
-  }
-  .toggle-moral {
-    margin-top: 8px;
   }
 
   /* Desktop: the fork sparkline stays in the sticky visual's meter, so this

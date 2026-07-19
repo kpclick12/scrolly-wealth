@@ -25,7 +25,7 @@
 
   <Scrolly onStepChange={(i) => (currentStep = i)}>
     {#snippet visual()}
-      <div class="visual-frame-stack" style="--stack-height:480px; --stack-height-mobile:380px;">
+      <div class="visual-frame-stack" style="--stack-height:480px; --stack-height-mobile:clamp(336px, 38svh, 380px);">
         <div class="frame" class:is-active={currentStep === 0}>
           <LineChart
             series={gdpSeries}

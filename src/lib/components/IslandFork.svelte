@@ -90,13 +90,17 @@
   }
   .fork.compact {
     margin-top: 6px;
-    padding: 6px 10px 8px;
+    padding: 6px 10px 6px;
   }
   .fork.compact .fork-caption {
-    margin-bottom: 4px;
+    margin-bottom: 2px;
+    font-size: 10.5px;
   }
   .fork.compact .fork-charts {
     gap: 10px;
+  }
+  .fork.compact .fork-item {
+    gap: 2px;
   }
   @media (max-width: 860px) {
     .fork {
