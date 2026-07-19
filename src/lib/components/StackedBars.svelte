@@ -1,14 +1,22 @@
 <script>
-  import { onMount } from "svelte";
-
   // Horizontal 100%-stacked bars with a 2px gap between segments.
   // rows: [{ label, sublabel?, note?, parts: [{ key, value, color, light? }] }]
   // Segment values in percent (sum ~100). Labels are drawn inside segments >= minLabel.
-  let { rows = [], title = "", minLabel = 7, legend = [] } = $props();
+  // active: replay the grow-in animation whenever this chart becomes the
+  // current step, not just on first mount — needed now that visuals stay
+  // mounted across a whole act instead of remounting per step.
+  let { rows = [], title = "", minLabel = 7, legend = [], active = true } = $props();
 
   let revealed = $state(false);
-  onMount(() => {
-    requestAnimationFrame(() => requestAnimationFrame(() => (revealed = true)));
+  $effect(() => {
+    if (active) {
+      revealed = false;
+      let raf1 = requestAnimationFrame(() => {
+        raf1 = requestAnimationFrame(() => (revealed = true));
+      });
+      return () => cancelAnimationFrame(raf1);
+    }
+    revealed = false;
   });
 </script>
 

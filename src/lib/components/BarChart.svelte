@@ -1,8 +1,13 @@
 <script>
-  import { onMount } from "svelte";
   import { scaleLinear } from "d3-scale";
 
   // data: [{ label, value, color? }]
+  // active: replay the grow-in animation on (re-)entry — the chart can now
+  // stay mounted across several steps of an act instead of remounting.
+  // highlight: optional array of labels to keep at full opacity while the
+  // rest dim — lets one persistent bar chart "do something" per step
+  // (e.g. spotlight the richest countries, then spotlight the poorest)
+  // without ever swapping the component out.
   let {
     data = [],
     color = "var(--series-blue)",
@@ -10,6 +15,8 @@
     title = "",
     maxValue = null,
     valueFormatter = null,
+    active = true,
+    highlight = null,
   } = $props();
 
   const domainMax = $derived(
@@ -19,10 +26,19 @@
 
   const fmt = (v, i) => (valueFormatter ? valueFormatter(v, i) : `${v.toFixed(1)}${unit}`);
 
-  // Bars grow in once the step becomes active (component remounts per step).
+  const highlightSet = $derived(highlight ? new Set(highlight) : null);
+  const isDimmed = (label) => highlightSet != null && !highlightSet.has(label);
+
   let revealed = $state(false);
-  onMount(() => {
-    requestAnimationFrame(() => requestAnimationFrame(() => (revealed = true)));
+  $effect(() => {
+    if (active) {
+      revealed = false;
+      let raf1 = requestAnimationFrame(() => {
+        raf1 = requestAnimationFrame(() => (revealed = true));
+      });
+      return () => cancelAnimationFrame(raf1);
+    }
+    revealed = false;
   });
 </script>
 
@@ -30,7 +46,7 @@
   {#if title}<figcaption class="title">{title}</figcaption>{/if}
   <div class="rows">
     {#each data as d, i (d.label)}
-      <div class="row">
+      <div class="row" class:dim={isDimmed(d.label)}>
         <span class="label">{d.label}</span>
         <div class="bar-line">
           <div class="track">
@@ -64,6 +80,13 @@
     display: flex;
     flex-direction: column;
     gap: 13px;
+  }
+  .row {
+    transition: opacity 0.4s ease, filter 0.4s ease;
+  }
+  .row.dim {
+    opacity: 0.32;
+    filter: saturate(0.6);
   }
   .label {
     display: block;

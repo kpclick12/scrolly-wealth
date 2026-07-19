@@ -1,43 +1,52 @@
 <script>
-  import { onMount } from "svelte";
-
   // Three columns: assets, minus debts, equals net worth.
-  let { assets, debts, netWorth } = $props();
+  // Built as a single CSS grid so all three bar tracks share one baseline
+  // (row 1), and the value row (row 2) and label row (row 3) are shared
+  // rows too — a column with a longer wrapped label can never push its
+  // own bar or value out of line with the other two, because the row
+  // heights are set by the tallest cell across ALL columns, not per-column.
+  let { assets, debts, netWorth, active = true } = $props();
 
   const max = $derived(Math.max(assets, debts, netWorth) * 1.1);
   const fmt = (v) => `$${Math.round(v).toLocaleString("en-US")}`;
 
+  // Replay the grow-in animation every time this becomes the active step,
+  // not just on first mount — the visual now stays mounted across the
+  // whole act, so "revealed" must be able to reset and fire again.
   let revealed = $state(false);
-  onMount(() => {
-    requestAnimationFrame(() => requestAnimationFrame(() => (revealed = true)));
+  $effect(() => {
+    if (active) {
+      revealed = false;
+      let raf1 = requestAnimationFrame(() => {
+        raf1 = requestAnimationFrame(() => (revealed = true));
+      });
+      return () => cancelAnimationFrame(raf1);
+    }
+    revealed = false;
   });
 </script>
 
 <figure class="networth">
-  <div class="cols">
-    <div class="col">
-      <div class="bar-wrap">
-        <div class="bar assets" style="height:{revealed ? (assets / max) * 100 : 0}%"></div>
-      </div>
-      <span class="val">{fmt(assets)}</span>
-      <span class="cap">What you own</span>
+  <div class="grid">
+    <div class="bar-wrap col-a">
+      <div class="bar assets" style="height:{revealed ? (assets / max) * 100 : 0}%"></div>
     </div>
-    <span class="op">&minus;</span>
-    <div class="col">
-      <div class="bar-wrap">
-        <div class="bar debts" style="height:{revealed ? (debts / max) * 100 : 0}%"></div>
-      </div>
-      <span class="val">{fmt(debts)}</span>
-      <span class="cap">What you owe</span>
+    <span class="op op-minus">&minus;</span>
+    <div class="bar-wrap col-b">
+      <div class="bar debts" style="height:{revealed ? (debts / max) * 100 : 0}%"></div>
     </div>
-    <span class="op">=</span>
-    <div class="col result">
-      <div class="bar-wrap">
-        <div class="bar net" style="height:{revealed ? (netWorth / max) * 100 : 0}%"></div>
-      </div>
-      <span class="val">{fmt(netWorth)}</span>
-      <span class="cap">Net worth</span>
+    <span class="op op-equals">=</span>
+    <div class="bar-wrap col-c result">
+      <div class="bar net" style="height:{revealed ? (netWorth / max) * 100 : 0}%"></div>
     </div>
+
+    <span class="val col-a">{fmt(assets)}</span>
+    <span class="val col-b">{fmt(debts)}</span>
+    <span class="val col-c result">{fmt(netWorth)}</span>
+
+    <span class="cap col-a">What you own</span>
+    <span class="cap col-b">What you owe</span>
+    <span class="cap col-c">Net worth</span>
   </div>
 </figure>
 
@@ -47,28 +56,38 @@
     width: 100%;
     max-width: 460px;
   }
-  .cols {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    gap: 14px;
-  }
-  .col {
-    display: flex;
-    flex-direction: column;
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    grid-template-rows: auto auto auto;
+    column-gap: 10px;
+    row-gap: 8px;
     align-items: center;
-    gap: 6px;
-    width: 92px;
+    justify-items: center;
   }
   .bar-wrap {
-    height: 220px;
+    grid-row: 1;
+    height: 200px;
     width: 100%;
+    max-width: 92px;
     display: flex;
     align-items: flex-end;
     background: var(--gridline);
     border-radius: 6px;
     overflow: hidden;
   }
+  .col-a { grid-column: 1; }
+  .col-b { grid-column: 3; }
+  .col-c { grid-column: 5; }
+  .op {
+    grid-row: 1;
+    align-self: center;
+    font-family: var(--serif);
+    font-size: 28px;
+    color: var(--text-muted);
+  }
+  .op-minus { grid-column: 2; }
+  .op-equals { grid-column: 4; }
   .bar {
     width: 100%;
     border-radius: 6px 6px 0 0;
@@ -84,35 +103,40 @@
     background: var(--hero-gold);
   }
   .val {
+    grid-row: 2;
     font-family: var(--serif);
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--text-primary);
+    white-space: nowrap;
+  }
+  .val.result {
+    color: var(--ink-gold);
   }
   .cap {
+    grid-row: 3;
     font-size: 12px;
     color: var(--text-muted);
     text-align: center;
-  }
-  .op {
-    font-family: var(--serif);
-    font-size: 30px;
-    color: var(--text-muted);
-    padding-bottom: 60px;
-  }
-  .result .val {
-    color: var(--ink-gold);
+    line-height: 1.3;
   }
   @media (max-width: 860px) {
     .bar-wrap {
-      height: 140px;
-    }
-    .col {
-      width: 74px;
+      height: 130px;
+      max-width: 72px;
     }
     .op {
-      font-size: 22px;
-      padding-bottom: 40px;
+      font-size: 20px;
+    }
+    .val {
+      font-size: 13px;
+    }
+    .cap {
+      font-size: 10.5px;
+    }
+    .grid {
+      column-gap: 6px;
+      row-gap: 5px;
     }
   }
 </style>

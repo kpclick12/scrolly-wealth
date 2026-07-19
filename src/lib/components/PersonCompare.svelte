@@ -1,13 +1,27 @@
 <script>
   // Two illustrative people side by side: high income/low wealth vs the reverse.
   // people: [{ name, income, netWorth, note }]
-  let { people = [] } = $props();
+  let { people = [], active = true } = $props();
   const fmt = (v) => `$${Math.round(v).toLocaleString("en-US")}`;
+
+  // Cards slide/fade in with a stagger whenever this becomes the active
+  // step — replayed on re-entry, not just first mount.
+  let revealed = $state(false);
+  $effect(() => {
+    if (active) {
+      revealed = false;
+      let raf1 = requestAnimationFrame(() => {
+        raf1 = requestAnimationFrame(() => (revealed = true));
+      });
+      return () => cancelAnimationFrame(raf1);
+    }
+    revealed = false;
+  });
 </script>
 
 <div class="compare">
   {#each people as p, i}
-    <div class="card">
+    <div class="card" class:revealed style="transition-delay: {i * 140}ms">
       <p class="name">{p.name}</p>
       <div class="metric">
         <span class="metric-value">{fmt(p.income)}<span class="unit">/yr</span></span>
@@ -35,6 +49,13 @@
     border-radius: 8px;
     padding: 16px 18px;
     border: 1px solid var(--border);
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.25, 1, 0.35, 1);
+  }
+  .card.revealed {
+    opacity: 1;
+    transform: translateY(0);
   }
   .name {
     font-size: 13px;
@@ -76,5 +97,13 @@
     font-size: 12.5px;
     color: var(--text-secondary);
     line-height: 1.5;
+  }
+  @media (max-width: 860px) {
+    .card {
+      padding: 12px 14px;
+    }
+    .metric-value {
+      font-size: 16px;
+    }
   }
 </style>
