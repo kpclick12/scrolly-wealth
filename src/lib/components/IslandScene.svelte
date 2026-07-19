@@ -7,6 +7,8 @@
   // end state instantly — Svelte's `in:` transitions aren't covered by the
   // CSS-level reduced-motion override in app.css, so they're gated here too.
   // figures: island.json's `figures` — [{ id, arrival, icon, color, label, pile:[7] }]
+  import { fly } from "svelte/transition";
+
   let { figures = [], step = 0, fifthState = "takes" } = $props();
 
   const reduced =

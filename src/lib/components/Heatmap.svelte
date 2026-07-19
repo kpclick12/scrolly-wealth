@@ -5,7 +5,7 @@
   // Dark mode uses its own ramp running the other way — low values stay
   // recessive against the dark surface instead of glowing brightest.
   const BLUE_RAMP = ["#eef3fb", "#cfe0f5", "#a3c5ea", "#6fa5db", "#3d84c9", "#1f66ac", "#134a80"];
-  const BLUE_RAMP_DARK = ["#231f18", "#1c3350", "#204769", "#2d6291", "#4482b7", "#63a4d6", "#96c7ec"];
+  const BLUE_RAMP_DARK = ["#142743", "#1c3350", "#204769", "#2d6291", "#4482b7", "#63a4d6", "#96c7ec"];
   const prefersDark =
     typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches;
 

@@ -25,9 +25,11 @@
   --baseline: #c9bd9d;
   --border: rgba(32, 26, 18, 0.12);
 
-  /* Hero / narrative surfaces — deep ink with a brass accent. */
-  --hero-ink: #241d14;
-  --hero-ink-deep: #16110a;
+  /* Hero / narrative surfaces — deep ink-navy with a brass accent. Always
+     dark regardless of OS color-scheme (these back the hero, the wheel game
+     and the explorer, which never go "warm paper"). */
+  --hero-ink: #14243a;
+  --hero-ink-deep: #0c1a2e;
   --hero-gold: #d9a94a;
   --hero-cream: #efe3c8;
   /* Darker steps of the categorical hues, for use as TEXT on the light
@@ -55,6 +57,15 @@
 
   --accent: var(--hero-gold);
 
+  /* Ordinal ramp for the wealth pyramid (LinkedPyramid.svelte): one hue
+     (teal, harmonizing with --ink-teal / the island act), monotone
+     lightness low band -> high band. Validated with the dataviz skill's
+     ordinal check against both card surfaces above. */
+  --pyramid-1: #69ac9c;
+  --pyramid-2: #4b9889;
+  --pyramid-3: #2d8378;
+  --pyramid-4: #0f6f66;
+
   --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
   font: 16px/1.55 var(--sans);
@@ -69,13 +80,15 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --surface-1: #1c1811;
-    --page-plane: #14110c;
+    /* Same deep ink-navy family as the always-dark hero/wheel/explorer
+       surfaces above, so dark mode never turns brown either. */
+    --surface-1: #16283f;
+    --page-plane: #0c1a2e;
     --text-primary: #f5efe0;
     --text-secondary: #cabfa8;
     --text-muted: #948a72;
-    --gridline: #2c2619;
-    --baseline: #443c2b;
+    --gridline: #1f3552;
+    --baseline: #2c4a6e;
     --border: rgba(245, 239, 224, 0.12);
 
     --hero-gold: #d9a94a;
@@ -94,6 +107,11 @@
 
     --ink-blue: #3987e5;
     --ink-red: #e66767;
+
+    --pyramid-1: #3a6f65;
+    --pyramid-2: #4f9689;
+    --pyramid-3: #69bcae;
+    --pyramid-4: #8fe6da;
   }
 }
 
@@ -130,6 +148,19 @@ p {
 }
 .badge-red {
   background: var(--series-red);
+}
+
+/* Visible keyboard focus everywhere by default — dark ink on the warm-paper
+   surfaces. Sections that are permanently dark (hero, wheel game, explorer)
+   override this locally with a gold ring instead, since dark-on-dark would
+   be invisible there regardless of the OS color scheme. */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--text-primary);
+  outline-offset: 2px;
 }
 
 /* Respect the reduced-motion system setting. */
