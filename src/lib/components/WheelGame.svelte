@@ -203,13 +203,18 @@
       </div>
 
       <div class="game-side">
-        <button class="spin-btn" onclick={spin} disabled={spinning}>
+        <button
+          class="spin-btn"
+          onclick={spin}
+          disabled={spinning}
+          aria-label={spinning ? "Spinning the wheel of birth" : history.length ? "Spin the wheel of birth again" : "Spin the wheel of birth"}
+        >
           {spinning ? "Spinning…" : history.length ? "Spin again" : "Spin the wheel"}
         </button>
 
         {#if resultEntry}
           {@const e = resultEntry}
-          <div class="result-card" role="status">
+          <div class="result-card" role="status" aria-live="polite">
             <p class="result-kicker">You were born in</p>
             <h3 class="result-name">{e.name}{e.type === "region" ? " (regional average)" : ""}</h3>
             <p class="result-share">{e.birthShare}% of the world's babies are born here</p>
@@ -358,6 +363,10 @@
   .spin-btn:disabled {
     opacity: 0.6;
     cursor: default;
+  }
+  .spin-btn:focus-visible {
+    outline: 2px solid var(--hero-gold);
+    outline-offset: 3px;
   }
   .result-placeholder {
     background: rgba(255, 255, 255, 0.06);

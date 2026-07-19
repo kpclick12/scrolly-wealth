@@ -1,7 +1,7 @@
 <script>
   import Scrolly from "../components/Scrolly.svelte";
   import BarChart from "../components/BarChart.svelte";
-  import DotWaffle from "../components/DotWaffle.svelte";
+  import LinkedPyramid from "../components/LinkedPyramid.svelte";
 
   let { data } = $props();
   let currentStep = $state(0);
@@ -42,23 +42,22 @@
           ? `$${(v / 1000).toFixed(1)}k`
           : `$${Math.round(v)}`;
 
-  // Same 1,000 dots, both pyramid steps — bands come straight from
-  // pyramid.json (key, color, adults%, wealth%), which is exactly the
-  // shape DotWaffle expects.
+  // Both pyramid steps share one LinkedPyramid instance — bands come
+  // straight from pyramid.json (key, color, adults%, wealth%).
   const bands = $derived(data.pyramid.tiers);
 
   const steps = [
     { kicker: "Different islands, different rules", headline: "Line up the islands, and the range is staggering" },
     { kicker: "Where most people live", headline: "The richest islands aren't where most people live" },
     { kicker: "The global pyramid", headline: "Zoom out to every islander on Earth" },
-    { kicker: "Same dots, different lens", headline: "Now weight the very same dots by wealth" },
+    { kicker: "Two sides of one pyramid", headline: "A sliver of people, nearly half the wealth" },
   ];
 
-  // BarChart persists across steps 0–1, DotWaffle across steps 2–3.
+  // BarChart persists across steps 0–1, LinkedPyramid across steps 2–3.
   const barActive = $derived(currentStep === 0 || currentStep === 1);
-  const waffleActive = $derived(currentStep === 2 || currentStep === 3);
+  const pyramidActive = $derived(currentStep === 2 || currentStep === 3);
   const barHighlight = $derived(currentStep === 1 ? MOST_HUMANS : RICHEST);
-  const waffleMode = $derived(currentStep === 3 ? "wealth" : "adults");
+  const pyramidHighlight = $derived(currentStep === 3 ? "top" : "bottom");
 </script>
 
 <section class="act" aria-label="Act 3: Between countries" style="--act-accent: var(--series-violet);">
@@ -69,7 +68,7 @@
 
   <Scrolly onStepChange={(i) => (currentStep = i)}>
     {#snippet visual()}
-      <div class="visual-frame-stack" style="--stack-height:480px; --stack-height-mobile:420px;">
+      <div class="visual-frame-stack" style="--stack-height:480px; --stack-height-mobile:500px;">
         <div class="frame" class:is-active={barActive}>
           <BarChart
             data={countryBars}
@@ -79,12 +78,11 @@
             highlight={barHighlight}
           />
         </div>
-        <div class="frame" class:is-active={waffleActive}>
-          <DotWaffle
+        <div class="frame" class:is-active={pyramidActive}>
+          <LinkedPyramid
             {bands}
-            mode={waffleMode}
-            active={waffleActive}
-            caption="Each dot ≈ 0.1% of the world's adults, colored by wealth band (UBS/Credit Suisse Global Wealth Report 2023)."
+            highlight={pyramidHighlight}
+            caption="Left: each wealth band's share of global wealth. Right: the same band's share of the world's 100 adults. UBS/Credit Suisse Global Wealth Report 2023."
           />
         </div>
       </div>
@@ -123,29 +121,28 @@
           </p>
         {:else if i === 2}
           <p>
-            Zoom out to the whole planet and the picture gets sharper. Every
-            dot here is roughly the same slice of the world's adults —
-            about <strong>53%</strong> of them own less than $10,000, shown
-            in the largest band below.
+            Zoom out to the whole planet. On the right, 100 dots stand in
+            for every adult on Earth, grouped into the same four wealth
+            bands. Look at the bottom band: about <strong>53%</strong> of
+            adults — more than half the grid — own less than $10,000.
           </p>
           <p>
-            Grouped this way, the bands are sized by <strong>how many
-            people</strong> are in each one. It already looks lopsided. It's
-            about to look more so.
+            Now look left, at that same band's sliver on the wealth bar.
+            Same people, same color, barely any bar. Watch the gold line:
+            it's about to connect to a very different picture.
           </p>
         {:else if i === 3}
           <p>
-            Same 1,000 dots, same colors — now watch the bands resize to
-            show <strong>how much wealth</strong> each one holds instead of
-            how many people are in it.
+            Same bands, same dots — now follow the gold line to the top.
+            The <strong>dollar-millionaires</strong>, just over
+            <strong>1%</strong> of adults, are almost invisible on the
+            people grid. On the wealth bar, that same sliver of people fills
+            nearly <strong>half the bar</strong>.
           </p>
           <p>
-            The band that held over half the dots shrinks to a sliver: those
-            adults hold roughly <strong>1.2%</strong> of all household
-            wealth on Earth. The smallest band — the dollar-millionaires,
-            just <strong>1.1%</strong> of adults — swells to hold nearly
-            <strong>46%</strong> of it. A handful of thresholds place anyone
-            on this map, from the poorest islander to the richest — find
+            About 1.1% of adults hold nearly half of all wealth. About 53%
+            share barely more than 1%. A handful of thresholds place anyone
+            on this pyramid, from the poorest islander to the richest — find
             yours further down the page.
           </p>
         {/if}
