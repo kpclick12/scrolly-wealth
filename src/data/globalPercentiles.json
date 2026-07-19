@@ -1,0 +1,19 @@
+{
+  "source": "UBS/Credit Suisse Global Wealth Report 2023 (data year 2022) global adult wealth distribution — approximate anchor points read off the report's pyramid/distribution figures, in USD at market exchange rates. Not an official percentile table: the curve between anchors is our own log-linear interpolation, built only to give a reader a rough sense of where a given net worth sits worldwide.",
+  "note": "netWorth is the lower bound of net worth (USD) at which an adult reaches the given global percentile. The first anchor (netWorth 0) is a floor: zero or negative net worth is treated as flat at the 10th percentile rather than interpolated, since a log scale has no value for zero or below. Above the last anchor ($5,000,000), position is clamped and reported as 'top 0.1%' rather than interpolated further.",
+  "anchors": [
+    { "netWorth": 0, "percentile": 10 },
+    { "netWorth": 100, "percentile": 20 },
+    { "netWorth": 1000, "percentile": 30 },
+    { "netWorth": 3000, "percentile": 40 },
+    { "netWorth": 8700, "percentile": 50 },
+    { "netWorth": 10000, "percentile": 53 },
+    { "netWorth": 25000, "percentile": 65 },
+    { "netWorth": 50000, "percentile": 75 },
+    { "netWorth": 100000, "percentile": 87 },
+    { "netWorth": 140000, "percentile": 90 },
+    { "netWorth": 300000, "percentile": 95 },
+    { "netWorth": 1080000, "percentile": 99 },
+    { "netWorth": 5000000, "percentile": 99.9 }
+  ]
+}

@@ -6,6 +6,7 @@
   import ActThree from "./lib/story/ActThree.svelte";
   import ActFour from "./lib/story/ActFour.svelte";
   import WheelGame from "./lib/components/WheelGame.svelte";
+  import StandExplorer from "./lib/components/StandExplorer.svelte";
 
   // A quiet backdrop motif for the hero: coins scattered unevenly, a visual
   // echo of the essay's point before a single word of it is read.
@@ -59,6 +60,8 @@
 </main>
 
 <WheelGame data={data.wheel} />
+
+<StandExplorer countries={data.countries.countries} percentiles={data.globalPercentiles} />
 
 <section class="sources" aria-label="Methodology and sources">
   <div class="sources-inner">
@@ -117,6 +120,14 @@
         Regional "rest of…" buckets in the wheel game are rough regional
         averages, a visibly weaker approximation than the named countries
         — they exist so the odds sum to a full 100% of world births.
+      </li>
+      <li>
+        The "Explore: where do you stand?" section's global percentile and
+        ladder position are a rough, illustrative placement, log-interpolated
+        between a handful of approximate Global Wealth Report anchor points
+        (see <code>src/data/globalPercentiles.json</code>) — not an official
+        percentile lookup — and, like the rest of the page, measured in USD
+        at market exchange rates.
       </li>
     </ul>
   </div>
