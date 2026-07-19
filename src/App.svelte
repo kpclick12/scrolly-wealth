@@ -1,10 +1,10 @@
 <script>
   import { appData as data } from "./lib/data/load.js";
-  import ActOne from "./lib/story/ActOne.svelte";
-  import ActTwo from "./lib/story/ActTwo.svelte";
-  import ActPie from "./lib/story/ActPie.svelte";
-  import ActThree from "./lib/story/ActThree.svelte";
-  import ActFour from "./lib/story/ActFour.svelte";
+  import IslandAct from "./lib/story/IslandAct.svelte";
+  import ActReal from "./lib/story/ActReal.svelte";
+  import ActBetween from "./lib/story/ActBetween.svelte";
+  import ActWithin from "./lib/story/ActWithin.svelte";
+  import ActPile from "./lib/story/ActPile.svelte";
   import WheelGame from "./lib/components/WheelGame.svelte";
   import StandExplorer from "./lib/components/StandExplorer.svelte";
 
@@ -37,11 +37,12 @@
     <p class="eyebrow">A visual essay on wealth</p>
     <h1>The Birth Lottery</h1>
     <p class="subtitle">
-      What is wealth, who has it, and how much of it was decided the day you
-      were born? This is a walk through how money accumulates, whether
-      wealth is even a fixed pot to begin with, why it piles up so unevenly
-      between countries and within them — and an interactive spin of the
-      odds you were actually dealt.
+      Start with one person, alone on an island with no money at all. Watch
+      what happens when a second person arrives, then a third, a fourth, a
+      fifth. That small story explains more about wealth than any
+      spreadsheet — how it's created, why it piles up so unevenly between
+      countries and within them, and how much of your own share was decided
+      the day you were born. Then spin the wheel and find out.
     </p>
     <p class="data-note">
       Figures throughout are approximate, sourced and rounded for clarity —
@@ -52,11 +53,11 @@
 </header>
 
 <main>
-  <ActOne {data} />
-  <ActTwo {data} />
-  <ActPie {data} />
-  <ActThree {data} />
-  <ActFour {data} />
+  <IslandAct {data} />
+  <ActReal {data} />
+  <ActBetween {data} />
+  <ActWithin {data} />
+  <ActPile {data} />
 </main>
 
 <WheelGame data={data.wheel} />
@@ -73,6 +74,14 @@
     </p>
     <ul>
       <li>
+        <strong>Act One, "The Island,"</strong> is a parable, not data — an
+        illustrative thought experiment about how trade, ideas, rules and
+        shocks change total output on an imaginary island of a few people.
+        Its "island wealth" meter is an arbitrary index, not a currency
+        figure. Every number elsewhere on this page remains sourced and
+        approximate, as below.
+      </li>
+      <li>
         <strong>Wealth levels, the global pyramid, and millionaire
         counts</strong> — UBS/Credit Suisse, <em>Global Wealth Report
         2023</em> (data year 2022).
@@ -83,18 +92,16 @@
         for around 2022.
       </li>
       <li>
-        <strong>World GDP per capita over the long run</strong> (Act
-        Three's "does the pie grow" chart) — Maddison Project Database,
+        <strong>World GDP per capita over the long run</strong> (Act Two's
+        "Earth ran the island's story" chart) — Maddison Project Database,
         inflation-adjusted international dollars. Pre-modern estimates
         especially are rough, order-of-magnitude figures, not precise
         statistics.
       </li>
       <li>
-        <strong>Global household wealth over time, and country wealth
-        growth</strong> (also Act Three) — UBS/Credit Suisse Global Wealth
-        Report / Databook. The split between nominal and inflation-adjusted
-        ("real") growth is an illustrative approximation built from that
-        report's commentary, not a precisely deflated series.
+        <strong>Country wealth growth over time</strong> (also Act Two) —
+        UBS/Credit Suisse Global Wealth Report / Databook, approximate
+        historical estimates.
       </li>
       <li>
         <strong>Shares of world births</strong>, used to size the wheel —
@@ -109,12 +116,11 @@
         country than the raw number suggests.
       </li>
       <li>
-        The household balance-sheet example in Act One, the compounding
-        chart in Act Two, the inheritance split in Act Two, and the
-        money-supply illustration in Act Three are
-        <strong>illustrative examples</strong> built to demonstrate a
-        mechanism, not measured statistics for any single country — see
-        each chart's caption for its basis.
+        The household balance-sheet example, the compounding chart, and the
+        inheritance split in Act Five are <strong>illustrative
+        examples</strong> built to demonstrate a mechanism, not measured
+        statistics for any single country — see each chart's caption for
+        its basis.
       </li>
       <li>
         Regional "rest of…" buckets in the wheel game are rough regional
