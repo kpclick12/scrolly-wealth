@@ -2,6 +2,7 @@
   import Scrolly from "../components/Scrolly.svelte";
   import IslandScene from "../components/IslandScene.svelte";
   import IslandMeter from "../components/IslandMeter.svelte";
+  import IslandFork from "../components/IslandFork.svelte";
 
   let { data } = $props();
   let currentStep = $state(0);
@@ -77,10 +78,9 @@
           </p>
         {:else if i === 3}
           <p>
-            The fifth islander takes control of the field the others
-            cleared, and demands half of everything grown there. What
-            happens to the island next depends entirely on what the fifth
-            islander does with that power.
+            The fifth islander seizes the cleared field and takes half of
+            everything grown there. What they do with that power decides
+            what comes next.
           </p>
           <div class="toggle-row" role="group" aria-label="What does the fifth islander do?">
             <button
@@ -90,7 +90,7 @@
               aria-pressed={fifthState === "takes"}
               onclick={() => (fifthState = "takes")}
             >
-              Takes, contributes nothing
+              Takes only
             </button>
             <button
               type="button"
@@ -102,22 +102,27 @@
               Organizes &amp; contributes
             </button>
           </div>
+          <!-- Mobile only: the fork sparkline lives here, right next to the
+               toggle that drives it, so nothing important ever ends up
+               hidden behind this card (see IslandMeter.svelte's .sticky-fork
+               for the desktop counterpart, hidden here on mobile). -->
+          <div class="mobile-fork">
+            <IslandFork {fork} {fifthState} max={meterMax} compact />
+          </div>
           {#if fifthState === "takes"}
             <p class="toggle-note">
-              Half of everyone's harvest disappears into one pile. Output
-              stalls, then slides — there's less reason to plant a bigger
-              field.
+              Half of every harvest disappears into one pile. Output stalls,
+              then slides.
             </p>
           {:else}
             <p class="toggle-note">
-              The fifth islander clears more land and coordinates the
-              planting. Output keeps climbing — everyone, including the
-              fifth islander, ends up with more.
+              The fifth islander organizes the planting instead. Output
+              keeps climbing — everyone ends up with more.
             </p>
           {/if}
           <p class="toggle-moral">
-            The lesson isn't who's in charge. It's that rules letting people
-            keep enough of what they create are what keep the pie growing.
+            The lesson: rules that let people keep what they create are what
+            keep the pie growing.
           </p>
         {:else if i === 4}
           <p>
@@ -219,6 +224,13 @@
   .toggle-moral {
     margin-top: 8px;
   }
+
+  /* Desktop: the fork sparkline stays in the sticky visual's meter, so this
+     inline copy stays out of the way. */
+  .mobile-fork {
+    display: none;
+  }
+
   @media (max-width: 860px) {
     .toggle-row {
       margin: 2px 0 8px;
@@ -227,6 +239,27 @@
     .toggle-btn {
       padding: 6px 12px;
       font-size: 12.5px;
+    }
+    /* Mobile: render the fork right inside the card, next to the toggle
+       that drives it — the sticky visual's own copy is hidden (see
+       IslandMeter.svelte) so the feedback is never left stranded behind
+       the card that slides over the visual. */
+    .mobile-fork {
+      display: block;
+      margin: 6px 0 10px;
+    }
+
+    /* The meter is the one piece that must stay visible at every step, no
+       matter how tall a given step's card gets (the fifth-islander card,
+       with its toggle + fork, is the tallest in the act). Cards can slide
+       up over the *scene* — it's decorative — but never over the meter, so
+       visually put the meter first (shallow, right under the sticky's own
+       top padding) and let the scene sit deeper, where an overlap is
+       harmless. Reading/DOM order is unchanged; this is purely visual. */
+    :global(.island-act .island-meter) {
+      order: -1;
+      margin-top: 0;
+      margin-bottom: 10px;
     }
   }
 </style>
