@@ -377,8 +377,15 @@
     border: 1px dashed rgba(255, 255, 255, 0.25);
     border-radius: 10px;
     padding: 28px;
-    color: rgba(255, 255, 255, 0.6);
     font-size: 14px;
+  }
+  /* The global `p { color: var(--text-secondary) }` base style (app.css) is
+     tuned for the warm-paper surfaces and reads as near-invisible brown on
+     this always-dark ink-navy background (~1.5:1) — the plain <p> tag beats
+     inherited color, so it has to be overridden directly on the <p>, not
+     just on this wrapper. 0.6-opacity white clears 6.5:1 here. */
+  .result-placeholder p {
+    color: rgba(255, 255, 255, 0.6);
   }
   .result-card {
     background: var(--hero-ink-deep);
@@ -449,6 +456,9 @@
   .tally-list {
     margin: 0;
     line-height: 1.6;
+    /* Same global `p` cascade issue as .result-placeholder above — this
+       <p> needs its own color, the parent .tally's doesn't reach it. */
+    color: rgba(255, 255, 255, 0.6);
   }
   @media (max-width: 860px) {
     .wheel-game {

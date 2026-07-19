@@ -57,14 +57,19 @@
 
   --accent: var(--hero-gold);
 
-  /* Ordinal ramp for the wealth pyramid (LinkedPyramid.svelte): one hue
-     (teal, harmonizing with --ink-teal / the island act), monotone
-     lightness low band -> high band. Validated with the dataviz skill's
-     ordinal check against both card surfaces above. */
-  --pyramid-1: #69ac9c;
-  --pyramid-2: #4b9889;
-  --pyramid-3: #2d8378;
-  --pyramid-4: #0f6f66;
+  /* Diverging pair for the wealth pyramid (LinkedPyramid.svelte): the two
+     poorest bands ride a warm rust->amber arm, the two richest bands ride a
+     cool teal->navy arm (harmonizing with --ink-teal), so poor and rich
+     read as opposite poles instead of a single ramp that goes pale in the
+     middle. Poorest -> richest: rust, amber, teal, navy. Validated with the
+     dataviz skill's categorical validator (adjacent pairs — the four bands
+     only ever sit next to their neighbors in the stacked bar / dot grid)
+     against both card surfaces above; amber and teal sit in the documented
+     sub-3:1 WARN band, mitigated by the always-on legend text labels. */
+  --pyramid-1: #9c4a2b;
+  --pyramid-2: #c98a2e;
+  --pyramid-3: #049e83;
+  --pyramid-4: #0052a3;
 
   --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
@@ -108,10 +113,12 @@
     --ink-blue: #3987e5;
     --ink-red: #e66767;
 
-    --pyramid-1: #3a6f65;
-    --pyramid-2: #4f9689;
-    --pyramid-3: #69bcae;
-    --pyramid-4: #8fe6da;
+    /* Same diverging pair, restepped for the dark ink-navy surface —
+       validated separately, not an automatic flip of the light steps. */
+    --pyramid-1: #c04448;
+    --pyramid-2: #b08e05;
+    --pyramid-3: #088f73;
+    --pyramid-4: #0364b4;
   }
 }
 
