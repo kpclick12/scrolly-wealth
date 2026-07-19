@@ -59,6 +59,7 @@
   .fork-charts {
     display: flex;
     gap: 16px;
+    min-width: 0;
   }
   .fork-item {
     display: flex;
@@ -66,7 +67,18 @@
     align-items: center;
     gap: 4px;
     opacity: 0.45;
+    min-width: 0;
     transition: opacity 0.4s ease;
+  }
+  .fork-item svg {
+    /* The svg carries a fixed width/height attribute (its intrinsic size,
+       needed for the viewBox aspect ratio) — without this, two of them
+       side by side have a combined content-driven floor wide enough to
+       force the card (and the page) past the viewport edge on a narrow,
+       large-font phone. max-width lets it shrink when the flex item is
+       tighter than its intrinsic size; height:auto keeps the aspect ratio. */
+    max-width: 100%;
+    height: auto;
   }
   .fork-item.selected {
     opacity: 1;

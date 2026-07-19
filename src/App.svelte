@@ -268,6 +268,12 @@
   .sources li:last-child {
     margin-bottom: 0;
   }
+  .sources code {
+    /* A file path has no spaces to wrap at — at a large font size on a
+       narrow phone it's wide enough on its own to force this <li> (and the
+       whole page) to overflow horizontally. Let it break instead. */
+    overflow-wrap: anywhere;
+  }
   footer {
     padding: 40px 24px 80px;
     text-align: center;

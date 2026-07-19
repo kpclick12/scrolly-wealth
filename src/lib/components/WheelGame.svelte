@@ -293,7 +293,10 @@
   }
   .game-board {
     display: grid;
-    grid-template-columns: 380px 1fr;
+    /* Bare 1fr is minmax(auto, 1fr) — content in .game-side (e.g. the
+       result card's stats) could otherwise force this track, and the page,
+       wider than the viewport at a large font size. */
+    grid-template-columns: 380px minmax(0, 1fr);
     gap: 48px;
     align-items: start;
   }
@@ -343,6 +346,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    min-width: 0;
   }
   .spin-btn {
     align-self: flex-start;
@@ -403,7 +407,7 @@
   }
   .result-stats {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 14px;
     margin: 0 0 16px;
   }
@@ -411,6 +415,7 @@
     display: flex;
     flex-direction: column;
     gap: 2px;
+    min-width: 0;
   }
   .result-stats dt {
     font-size: 11.5px;
@@ -450,11 +455,11 @@
       padding: 60px 18px;
     }
     .game-board {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: 32px;
     }
     .result-stats {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 </style>

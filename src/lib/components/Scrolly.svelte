@@ -60,7 +60,16 @@
   .scrolly {
     position: relative;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    /* Bare `1fr` is really `minmax(auto, 1fr)` — the `auto` minimum lets a
+       track grow to fit its content's min-content width even past the
+       container's own width, which is how one unbreakable/fixed-width
+       element deep in either column (long nowrap text, a fixed-width SVG,
+       a chart that won't shrink) can force this whole grid — and the page
+       around it — wider than the viewport. `minmax(0, 1fr)` removes that
+       content-driven floor so the track always respects the available
+       space; anything that still doesn't fit clips/wraps locally instead
+       of blowing out the page. */
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 32px;
     align-items: start;
   }
@@ -73,12 +82,14 @@
     justify-content: center;
     padding: 24px;
     background: var(--page-plane);
+    min-width: 0;
   }
   .scrolly-steps {
     position: relative;
     z-index: 1;
     display: flex;
     flex-direction: column;
+    min-width: 0;
     gap: 60svh;
     padding-top: 30svh;
     padding-bottom: 60svh;
@@ -94,7 +105,7 @@
   }
   @media (max-width: 860px) {
     .scrolly {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
     /* The panel hugs its content — a tall chart gets room, a short one
        leaves more space for the text. Never taller than the screen. */

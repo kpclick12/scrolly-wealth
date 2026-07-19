@@ -123,6 +123,16 @@ body {
   margin: 0;
 }
 
+/* Last line of defense, not the fix: if some future element still forces a
+   descendant wider than the viewport, clip it here instead of letting the
+   whole page grow a horizontal scrollbar / auto-shrink. The real fixes are
+   the min-width:0 / minmax(0, 1fr) changes throughout the grid and flex
+   layouts below — this just contains whatever slips past them. */
+html,
+body {
+  overflow-x: clip;
+}
+
 h1, h2, h3 {
   font-family: var(--sans);
   font-weight: 600;
@@ -189,6 +199,7 @@ select:focus-visible,
   padding: 28px 32px;
   border-radius: 4px;
   box-shadow: 0 2px 10px rgba(32, 26, 18, 0.08);
+  min-width: 0;
 }
 .scrolly-step > * {
   opacity: 0.35;
