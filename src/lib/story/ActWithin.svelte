@@ -37,10 +37,10 @@
   ];
 </script>
 
-<section class="act" aria-label="Act 5: Wealth within countries" style="--act-accent: var(--ink-red);">
+<section class="act" aria-label="Act 4: Within countries" style="--act-accent: var(--ink-red);">
   <div class="act-head">
-    <p class="act-kicker">Act Five</p>
-    <h2>Wealth within countries</h2>
+    <p class="act-kicker">Act Four</p>
+    <h2>Within countries</h2>
   </div>
 
   <Scrolly onStepChange={(i) => (currentStep = i)}>
@@ -76,8 +76,10 @@
             in South Africa, about <strong>55%</strong>.
           </p>
           <p>
-            Even that top 1% alone, on their own, typically holds more than
-            the entire bottom half of the population combined.
+            Even that top 1% alone typically holds more than the entire
+            bottom half combined — the fifth islander's lesson, replayed at
+            national scale. Even on a rich island, who owns the land and the
+            tools decides who keeps the harvest.
           </p>
         {:else if i === 1}
           <p>
@@ -96,14 +98,15 @@
             Two forces stack on top of each other. <strong>Which
             country</strong> you're born into sets the overall scale — a
             median adult in one country can hold 100 times what a median
-            adult holds in another (Act Four). <strong>Where you land
+            adult holds in another (Act Three). <strong>Where you land
             within that country</strong>, highlighted here in
             <strong>South Africa's row</strong> — the most extreme case on
             this map — then decides your slice of an already unequal pie.
           </p>
           <p>
-            You don't get to choose either one. So — where does the birth
-            lottery send you? Scroll down and spin the wheel.
+            You don't get to choose either one. What you can do something
+            about is what happens next: your own pile, and how it grows.
+            Scroll on.
           </p>
         {/if}
       </section>
@@ -115,7 +118,7 @@
   .act {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 40px 24px 100px;
+    padding: 40px 24px;
   }
   .act-head {
     max-width: 640px;

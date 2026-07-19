@@ -10,6 +10,7 @@ import concentration from "../../data/concentration.json";
 import wheel from "../../data/wheel.json";
 import pie from "../../data/pie.json";
 import globalPercentiles from "../../data/globalPercentiles.json";
+import island from "../../data/island.json";
 
 export const appData = {
   netWorth,
@@ -22,4 +23,5 @@ export const appData = {
   wheel,
   pie,
   globalPercentiles,
+  island,
 };

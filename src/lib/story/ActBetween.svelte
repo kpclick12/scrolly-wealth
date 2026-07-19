@@ -2,7 +2,6 @@
   import Scrolly from "../components/Scrolly.svelte";
   import BarChart from "../components/BarChart.svelte";
   import DotWaffle from "../components/DotWaffle.svelte";
-  import StatTiles from "../components/StatTiles.svelte";
 
   let { data } = $props();
   let currentStep = $state(0);
@@ -48,20 +47,11 @@
   // shape DotWaffle expects.
   const bands = $derived(data.pyramid.tiers);
 
-  const thresholdTiles = $derived(
-    data.thresholds.thresholds.map((t, i) => ({
-      value: moneyFmt(t.value),
-      label: t.key,
-      accent: i === data.thresholds.thresholds.length - 1,
-    }))
-  );
-
   const steps = [
-    { kicker: "Median wealth", headline: "Where you're born sets the scale" },
-    { kicker: "Where most people live", headline: "Most of humanity lives far below that line" },
-    { kicker: "The global pyramid", headline: "Half the world splits about 1% of it" },
+    { kicker: "Different islands, different rules", headline: "Line up the islands, and the range is staggering" },
+    { kicker: "Where most people live", headline: "The richest islands aren't where most people live" },
+    { kicker: "The global pyramid", headline: "Zoom out to every islander on Earth" },
     { kicker: "Same dots, different lens", headline: "Now weight the very same dots by wealth" },
-    { kicker: "Where you'd rank", headline: "Three numbers that place anyone, anywhere" },
   ];
 
   // BarChart persists across steps 0–1, DotWaffle across steps 2–3.
@@ -71,10 +61,10 @@
   const waffleMode = $derived(currentStep === 3 ? "wealth" : "adults");
 </script>
 
-<section class="act" aria-label="Act 4: Wealth between countries" style="--act-accent: var(--series-violet);">
+<section class="act" aria-label="Act 3: Between countries" style="--act-accent: var(--series-violet);">
   <div class="act-head">
-    <p class="act-kicker">Act Four</p>
-    <h2>Wealth between countries</h2>
+    <p class="act-kicker">Act Three</p>
+    <h2>Between countries</h2>
   </div>
 
   <Scrolly onStepChange={(i) => (currentStep = i)}>
@@ -97,9 +87,6 @@
             caption="Each dot ≈ 0.1% of the world's adults, colored by wealth band (UBS/Credit Suisse Global Wealth Report 2023)."
           />
         </div>
-        <div class="frame" class:is-active={currentStep === 4}>
-          <StatTiles tiles={thresholdTiles} active={currentStep === 4} />
-        </div>
       </div>
     {/snippet}
 
@@ -109,9 +96,10 @@
         <h3>{step.headline}</h3>
         {#if i === 0}
           <p>
-            Line up countries by <strong>median wealth per adult</strong> —
-            the net worth of the person exactly in the middle — and the
-            range is staggering. A median adult in Belgium holds around
+            Line up countries — islands with entirely different histories,
+            rules and head starts — by <strong>median wealth per adult</strong>,
+            the net worth of the person exactly in the middle, and the range
+            is staggering. A median adult in Belgium holds around
             <strong>$250,000</strong>. A median adult in Ethiopia holds less
             than <strong>$1,000</strong>.
           </p>
@@ -156,20 +144,9 @@
             adults hold roughly <strong>1.2%</strong> of all household
             wealth on Earth. The smallest band — the dollar-millionaires,
             just <strong>1.1%</strong> of adults — swells to hold nearly
-            <strong>46%</strong> of it.
-          </p>
-        {:else if i === 4}
-          <p>
-            Three thresholds place anyone on Earth. Roughly
-            <strong>$8,700</strong> in net worth puts you in the richer half
-            of humanity. Around <strong>$140,000</strong> puts you in the
-            global top 10%. About <strong>$1.1 million</strong> puts you in
-            the global top 1%.
-          </p>
-          <p>
-            A middle-class net worth in a rich country can be an
-            extraordinary fortune by global standards — and the reverse is
-            just as true.
+            <strong>46%</strong> of it. A handful of thresholds place anyone
+            on this map, from the poorest islander to the richest — find
+            yours further down the page.
           </p>
         {/if}
       </section>

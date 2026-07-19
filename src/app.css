@@ -38,6 +38,7 @@
   --ink-blue: #184f95;
   --ink-red: #a8291f;
   --ink-green: #1f6d2b;
+  --ink-teal: #0f6f66;
 
   --serif: "Playfair Display", Georgia, "Times New Roman", "Liberation Serif", serif;
 
@@ -80,6 +81,7 @@
     --hero-gold: #d9a94a;
     --ink-gold: #e0b563;
     --ink-green: #5fc26a;
+    --ink-teal: #4dd0c4;
 
     --series-blue: #3987e5;
     --series-green: #008300;
