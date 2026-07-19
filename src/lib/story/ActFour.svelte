@@ -37,9 +37,9 @@
   ];
 </script>
 
-<section class="act" aria-label="Act 4: Wealth within countries" style="--act-accent: var(--ink-red);">
+<section class="act" aria-label="Act 5: Wealth within countries" style="--act-accent: var(--ink-red);">
   <div class="act-head">
-    <p class="act-kicker">Act Four</p>
+    <p class="act-kicker">Act Five</p>
     <h2>Wealth within countries</h2>
   </div>
 
@@ -96,7 +96,7 @@
             Two forces stack on top of each other. <strong>Which
             country</strong> you're born into sets the overall scale — a
             median adult in one country can hold 100 times what a median
-            adult holds in another (Act Three). <strong>Where you land
+            adult holds in another (Act Four). <strong>Where you land
             within that country</strong>, highlighted here in
             <strong>South Africa's row</strong> — the most extreme case on
             this map — then decides your slice of an already unequal pie.

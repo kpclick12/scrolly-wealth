@@ -40,18 +40,63 @@
   const returnCount = $derived(Math.round(returnTotal / unit));
   const yearLabel = $derived(saved[frame]?.x ?? "0");
   const fmt = (v) => (v >= 1000 ? `$${Math.round(v / 1000)}k` : `$${Math.round(v)}`);
+
+  // --- Overflow fix -------------------------------------------------
+  // The tower box has a fixed height (set in CSS, per breakpoint). Blocks
+  // used to render at a fixed pixel size, so on a short mobile panel the
+  // tallest stack (the final year) simply grew past the top of the box
+  // and covered the "Year 40" label above it. Instead, size every block
+  // as a share of the box's OWN measured height, based on the tallest
+  // the tower will ever get (the final frame's block count, since the
+  // series only grows) — so the stack is guaranteed to fit the box at
+  // every frame, on any screen, without ever needing to clip content.
+  const GAP = 2;
+  const PAD = 4; // .tower's 2px padding, top + bottom
+  let towerEl = $state(null);
+  let towerHeight = $state(0);
+
+  $effect(() => {
+    if (!towerEl || typeof ResizeObserver === "undefined") return;
+    const ro = new ResizeObserver((entries) => {
+      const h = entries[0]?.contentRect?.height;
+      if (h) towerHeight = h;
+    });
+    ro.observe(towerEl);
+    return () => ro.disconnect();
+  });
+
+  const finalTotalBlocks = $derived.by(() => {
+    if (N === 0) return 1;
+    const lastSaved = saved[N - 1]?.y ?? 0;
+    const lastGrown = grown[N - 1]?.y ?? 0;
+    const c = Math.round(lastSaved / unit);
+    const r = Math.round(Math.max(0, lastGrown - lastSaved) / unit);
+    return Math.max(1, c + r);
+  });
+
+  const blockSize = $derived.by(() => {
+    if (!towerHeight) return 9; // sane default before the first measurement
+    const available = Math.max(0, towerHeight - PAD);
+    const raw = (available - Math.max(0, finalTotalBlocks - 1) * GAP) / finalTotalBlocks;
+    return Math.max(1.5, Math.min(9, raw));
+  });
 </script>
 
 <figure class="tower-fig">
   <p class="year-label">Year <strong>{yearLabel}</strong></p>
   <div class="tower-row">
-    <div class="tower">
+    <div class="tower" bind:this={towerEl}>
       {#each Array.from({ length: contribCount }) as _, i (i)}
-        <div class="block contrib" in:fly={{ y: reduced ? 0 : 14, duration: reduced ? 0 : 260 }}></div>
+        <div
+          class="block contrib"
+          style="flex: 0 0 {blockSize}px"
+          in:fly={{ y: reduced ? 0 : 14, duration: reduced ? 0 : 260 }}
+        ></div>
       {/each}
       {#each Array.from({ length: returnCount }) as _, i (i)}
         <div
           class="block returns"
+          style="flex: 0 0 {blockSize}px"
           in:fly={{ y: reduced ? 0 : 14, duration: reduced ? 0 : 260 }}
         ></div>
       {/each}
@@ -106,9 +151,12 @@
     background: var(--gridline);
     border-radius: 8px;
     box-shadow: inset 0 0 0 1px var(--border);
+    /* Belt-and-suspenders: block sizes are computed in JS to always fit
+       this box's measured height, but clip just in case of a rounding
+       edge case — the stack must never spill over the label above it. */
+    overflow: hidden;
   }
   .block {
-    flex: 0 0 9px;
     border-radius: 2px;
   }
   .block.contrib {
@@ -167,9 +215,6 @@
     .tower {
       width: 58px;
       height: 160px;
-    }
-    .block {
-      flex-basis: 6px;
     }
     .total-value {
       font-size: 16px;

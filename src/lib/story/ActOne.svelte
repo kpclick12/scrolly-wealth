@@ -2,7 +2,6 @@
   import Scrolly from "../components/Scrolly.svelte";
   import NetWorthDiagram from "../components/NetWorthDiagram.svelte";
   import PersonCompare from "../components/PersonCompare.svelte";
-  import StackedBars from "../components/StackedBars.svelte";
 
   let { data } = $props();
   let currentStep = $state(0);
@@ -10,27 +9,9 @@
   const ex = $derived(data.netWorth.example);
   const people = $derived(data.netWorth.stockFlow);
 
-  const compositionRows = $derived([
-    {
-      label: "What you own",
-      parts: [
-        { key: "Financial assets (cash, deposits, stocks, pensions)", value: 16.7, color: "var(--series-blue)" },
-        { key: "Real assets (mainly housing)", value: 83.3, color: "var(--series-aqua)" },
-      ],
-    },
-    {
-      label: "After paying off what you owe",
-      parts: [
-        { key: "Net worth", value: Math.round((ex.netWorth / ex.assets) * 1000) / 10, color: "var(--hero-gold)", light: true },
-        { key: "Debt", value: Math.round((ex.debts / ex.assets) * 1000) / 10, color: "var(--series-red)" },
-      ],
-    },
-  ]);
-
   const steps = [
     { kicker: "The basics", headline: "What you own, minus what you owe" },
     { kicker: "A stock, not a flow", headline: "Income pays the bills. Wealth is the reservoir." },
-    { kicker: "What counts", headline: "Cash, houses, pensions — and debt" },
   ];
 </script>
 
@@ -48,9 +29,6 @@
         </div>
         <div class="frame" class:is-active={currentStep === 1}>
           <PersonCompare {people} active={currentStep === 1} />
-        </div>
-        <div class="frame" class:is-active={currentStep === 2}>
-          <StackedBars rows={compositionRows} title="An illustrative household's balance sheet" active={currentStep === 2} />
         </div>
       </div>
     {/snippet}
@@ -83,19 +61,6 @@
             over and still have far less net worth, because wealth is what
             accumulates after the bills, the debt payments and the years go
             by.
-          </p>
-        {:else if i === 2}
-          <p>
-            Wealth researchers count two broad kinds of assets:
-            <strong>financial assets</strong> — cash, bank deposits, stocks,
-            bonds, pension funds — and <strong>real assets</strong>, which
-            for most households means the home they live in.
-          </p>
-          <p>
-            For a typical homeowning household, housing dominates the asset
-            side. But a mortgage sits right alongside it: subtract the debt,
-            and what's left is the actual net worth — usually a much smaller
-            number than the price tag on the house.
           </p>
         {/if}
       </section>

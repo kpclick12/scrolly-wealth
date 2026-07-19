@@ -2,6 +2,7 @@
   import { appData as data } from "./lib/data/load.js";
   import ActOne from "./lib/story/ActOne.svelte";
   import ActTwo from "./lib/story/ActTwo.svelte";
+  import ActPie from "./lib/story/ActPie.svelte";
   import ActThree from "./lib/story/ActThree.svelte";
   import ActFour from "./lib/story/ActFour.svelte";
   import WheelGame from "./lib/components/WheelGame.svelte";
@@ -36,9 +37,10 @@
     <h1>The Birth Lottery</h1>
     <p class="subtitle">
       What is wealth, who has it, and how much of it was decided the day you
-      were born? This is a walk through how money accumulates, why it piles
-      up so unevenly between countries and within them — and an interactive
-      spin of the odds you were actually dealt.
+      were born? This is a walk through how money accumulates, whether
+      wealth is even a fixed pot to begin with, why it piles up so unevenly
+      between countries and within them — and an interactive spin of the
+      odds you were actually dealt.
     </p>
     <p class="data-note">
       Figures throughout are approximate, sourced and rounded for clarity —
@@ -51,6 +53,7 @@
 <main>
   <ActOne {data} />
   <ActTwo {data} />
+  <ActPie {data} />
   <ActThree {data} />
   <ActFour {data} />
 </main>
@@ -77,6 +80,20 @@
         for around 2022.
       </li>
       <li>
+        <strong>World GDP per capita over the long run</strong> (Act
+        Three's "does the pie grow" chart) — Maddison Project Database,
+        inflation-adjusted international dollars. Pre-modern estimates
+        especially are rough, order-of-magnitude figures, not precise
+        statistics.
+      </li>
+      <li>
+        <strong>Global household wealth over time, and country wealth
+        growth</strong> (also Act Three) — UBS/Credit Suisse Global Wealth
+        Report / Databook. The split between nominal and inflation-adjusted
+        ("real") growth is an illustrative approximation built from that
+        report's commentary, not a precisely deflated series.
+      </li>
+      <li>
         <strong>Shares of world births</strong>, used to size the wheel —
         United Nations, World Population Prospects, approximate recent
         estimates. This measures a share of babies born today, not a share
@@ -90,9 +107,10 @@
       </li>
       <li>
         The household balance-sheet example in Act One, the compounding
-        chart in Act Two, and the composition/inheritance figures in Act
-        Two are <strong>illustrative examples</strong> built to demonstrate
-        a mechanism, not measured statistics for any single country — see
+        chart in Act Two, the inheritance split in Act Two, and the
+        money-supply illustration in Act Three are
+        <strong>illustrative examples</strong> built to demonstrate a
+        mechanism, not measured statistics for any single country — see
         each chart's caption for its basis.
       </li>
       <li>
