@@ -1,8 +1,7 @@
 <script>
-  import { fade } from "svelte/transition";
   import Scrolly from "../components/Scrolly.svelte";
   import StackedBars from "../components/StackedBars.svelte";
-  import LineChart from "../components/LineChart.svelte";
+  import BlockTower from "../components/BlockTower.svelte";
   import BarChart from "../components/BarChart.svelte";
 
   let { data } = $props();
@@ -19,7 +18,6 @@
   ];
 
   const compoundingSeries = $derived(data.compounding.series);
-  const moneyFmt = (v) => (v >= 1000 ? `$${Math.round(v / 1000)}k` : `$${Math.round(v)}`);
 
   const ownershipRows = $derived([
     { label: "Composition of a large fortune", parts: data.wealthCreation.topWealthComposition },
@@ -41,7 +39,7 @@
   ];
 </script>
 
-<section class="act" aria-label="Act 2: How is wealth created?">
+<section class="act" aria-label="Act 2: How is wealth created?" style="--act-accent: var(--ink-gold);">
   <div class="act-head">
     <p class="act-kicker">Act Two</p>
     <h2>How is wealth created?</h2>
@@ -49,27 +47,19 @@
 
   <Scrolly onStepChange={(i) => (currentStep = i)}>
     {#snippet visual()}
-      <div class="visual-stack">
-        {#key currentStep}
-          <div class="visual-frame" in:fade={{ duration: 250 }}>
-            {#if currentStep === 0}
-              <StackedBars rows={savingRows} title="Where a typical paycheck goes" />
-            {:else if currentStep === 1}
-              <LineChart
-                series={compoundingSeries}
-                unit=""
-                valueFormatter={moneyFmt}
-                labelAll={false}
-                title="$200 saved every month, for 40 years"
-                note="Illustrative example: 7% average annual return, compounded monthly. Not investment advice."
-              />
-            {:else if currentStep === 2}
-              <StackedBars rows={ownershipRows} title="Illustrative composition of a large private fortune" />
-            {:else if currentStep === 3}
-              <BarChart data={inheritanceBars} maxValue={100} title="Where private wealth in rich economies came from" />
-            {/if}
-          </div>
-        {/key}
+      <div class="visual-frame-stack" style="--stack-height:500px; --stack-height-mobile:280px;">
+        <div class="frame" class:is-active={currentStep === 0}>
+          <StackedBars rows={savingRows} title="Where a typical paycheck goes" active={currentStep === 0} />
+        </div>
+        <div class="frame" class:is-active={currentStep === 1}>
+          <BlockTower series={compoundingSeries} active={currentStep === 1} />
+        </div>
+        <div class="frame" class:is-active={currentStep === 2}>
+          <StackedBars rows={ownershipRows} title="Illustrative composition of a large private fortune" active={currentStep === 2} />
+        </div>
+        <div class="frame" class:is-active={currentStep === 3}>
+          <BarChart data={inheritanceBars} maxValue={100} title="Where private wealth in rich economies came from" active={currentStep === 3} />
+        </div>
       </div>
     {/snippet}
 
@@ -91,14 +81,15 @@
         {:else if i === 1}
           <p>
             Put that saved money to work and something different happens.
-            The chart compares the same <strong>$200 a month</strong>, saved
-            for 40 years: once as cash under the mattress, once invested at
-            a 7% average annual return.
+            The tower stacks the same <strong>$200 a month</strong>, saved
+            for 40 years: contribution blocks first, then the blocks that
+            come from a 7% average annual return, stacking on top of them.
           </p>
           <p>
-            Both lines start from the identical habit. The gap between them
-            — roughly <strong>$429,000</strong> — isn't extra saving. It's
-            the return compounding on itself, decade after decade.
+            Watch which color the tower is mostly made of by the end. The
+            gap between the two totals — roughly <strong>$429,000</strong> —
+            isn't extra saving. It's the return compounding on itself,
+            decade after decade.
           </p>
         {:else if i === 2}
           <p>
@@ -147,7 +138,7 @@
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.18em;
-    color: var(--ink-gold);
+    color: var(--act-accent);
     font-weight: 700;
     margin: 0 0 10px;
   }
@@ -155,55 +146,5 @@
     font-family: var(--serif);
     font-size: clamp(28px, 4vw, 40px);
     margin: 0;
-  }
-  .visual-stack {
-    position: relative;
-    width: 100%;
-    min-height: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .visual-frame {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  :global(.act .scrolly-step) {
-    background: var(--surface-1);
-    border-left: 6px solid var(--series-yellow);
-    padding: 28px 32px;
-    border-radius: 4px;
-    box-shadow: 0 2px 10px rgba(32, 26, 18, 0.08);
-  }
-  :global(.act .scrolly-step > *) {
-    opacity: 0.35;
-    transition: opacity 0.3s ease;
-  }
-  :global(.act .scrolly-step.is-active > *) {
-    opacity: 1;
-  }
-  :global(.act .scrolly-step) .kicker {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--ink-gold);
-    margin: 0 0 8px;
-    font-weight: 700;
-  }
-  :global(.act .scrolly-step) h3 {
-    font-family: var(--serif);
-    margin: 0 0 14px;
-    font-size: 23px;
-    line-height: 1.25;
-  }
-  :global(.act .scrolly-step) p {
-    margin: 0 0 12px;
-    font-size: 15px;
-    line-height: 1.6;
-  }
-  :global(.act .scrolly-step) p:last-child {
-    margin-bottom: 0;
   }
 </style>

@@ -1,5 +1,4 @@
 <script>
-  import { fade } from "svelte/transition";
   import Scrolly from "../components/Scrolly.svelte";
   import NetWorthDiagram from "../components/NetWorthDiagram.svelte";
   import PersonCompare from "../components/PersonCompare.svelte";
@@ -35,7 +34,7 @@
   ];
 </script>
 
-<section class="act" aria-label="Act 1: What is wealth?">
+<section class="act" aria-label="Act 1: What is wealth?" style="--act-accent: var(--ink-blue);">
   <div class="act-head">
     <p class="act-kicker">Act One</p>
     <h2>What is wealth?</h2>
@@ -43,18 +42,16 @@
 
   <Scrolly onStepChange={(i) => (currentStep = i)}>
     {#snippet visual()}
-      <div class="visual-stack">
-        {#key currentStep}
-          <div class="visual-frame" in:fade={{ duration: 250 }}>
-            {#if currentStep === 0}
-              <NetWorthDiagram assets={ex.assets} debts={ex.debts} netWorth={ex.netWorth} />
-            {:else if currentStep === 1}
-              <PersonCompare {people} />
-            {:else if currentStep === 2}
-              <StackedBars rows={compositionRows} title="An illustrative household's balance sheet" />
-            {/if}
-          </div>
-        {/key}
+      <div class="visual-frame-stack" style="--stack-height:460px; --stack-height-mobile:380px;">
+        <div class="frame" class:is-active={currentStep === 0}>
+          <NetWorthDiagram assets={ex.assets} debts={ex.debts} netWorth={ex.netWorth} active={currentStep === 0} />
+        </div>
+        <div class="frame" class:is-active={currentStep === 1}>
+          <PersonCompare {people} active={currentStep === 1} />
+        </div>
+        <div class="frame" class:is-active={currentStep === 2}>
+          <StackedBars rows={compositionRows} title="An illustrative household's balance sheet" active={currentStep === 2} />
+        </div>
       </div>
     {/snippet}
 
@@ -121,7 +118,7 @@
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.18em;
-    color: var(--ink-blue);
+    color: var(--act-accent);
     font-weight: 700;
     margin: 0 0 10px;
   }
@@ -129,55 +126,5 @@
     font-family: var(--serif);
     font-size: clamp(28px, 4vw, 40px);
     margin: 0;
-  }
-  .visual-stack {
-    position: relative;
-    width: 100%;
-    min-height: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .visual-frame {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  :global(.act .scrolly-step) {
-    background: var(--surface-1);
-    border-left: 6px solid var(--series-blue);
-    padding: 28px 32px;
-    border-radius: 4px;
-    box-shadow: 0 2px 10px rgba(32, 26, 18, 0.08);
-  }
-  :global(.act .scrolly-step > *) {
-    opacity: 0.35;
-    transition: opacity 0.3s ease;
-  }
-  :global(.act .scrolly-step.is-active > *) {
-    opacity: 1;
-  }
-  :global(.act .scrolly-step) .kicker {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--ink-blue);
-    margin: 0 0 8px;
-    font-weight: 700;
-  }
-  :global(.act .scrolly-step) h3 {
-    font-family: var(--serif);
-    margin: 0 0 14px;
-    font-size: 23px;
-    line-height: 1.25;
-  }
-  :global(.act .scrolly-step) p {
-    margin: 0 0 12px;
-    font-size: 15px;
-    line-height: 1.6;
-  }
-  :global(.act .scrolly-step) p:last-child {
-    margin-bottom: 0;
   }
 </style>

@@ -3,12 +3,25 @@
   // per the dataviz method: when the job is "one number," a stat tile beats
   // a bar with one segment.
   // tiles: [{ value, label, accent? }]
-  let { tiles = [] } = $props();
+  // active: replay the entrance stagger whenever this becomes the current step.
+  let { tiles = [], active = true } = $props();
+
+  let revealed = $state(false);
+  $effect(() => {
+    if (active) {
+      revealed = false;
+      let raf1 = requestAnimationFrame(() => {
+        raf1 = requestAnimationFrame(() => (revealed = true));
+      });
+      return () => cancelAnimationFrame(raf1);
+    }
+    revealed = false;
+  });
 </script>
 
 <div class="stattiles">
-  {#each tiles as t}
-    <div class="tile" class:accent={t.accent}>
+  {#each tiles as t, i}
+    <div class="tile" class:accent={t.accent} class:revealed style="transition-delay: {i * 110}ms">
       <span class="value">{t.value}</span>
       <span class="label">{t.label}</span>
     </div>
@@ -31,6 +44,13 @@
     background: var(--surface-1);
     border-left: 4px solid var(--series-blue);
     border-radius: 6px;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.25, 1, 0.35, 1);
+  }
+  .tile.revealed {
+    opacity: 1;
+    transform: translateX(0);
   }
   .tile.accent {
     border-left-color: var(--hero-gold);
