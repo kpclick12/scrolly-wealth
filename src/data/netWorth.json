@@ -1,0 +1,19 @@
+{
+  "source": "Illustrative example for a typical middle-income household — not a measured statistic. Composition categories follow the definitions used in the UBS/Credit Suisse Global Wealth Report 2023.",
+  "example": {
+    "assets": 420000,
+    "financialAssets": 70000,
+    "realAssets": 350000,
+    "debts": 180000,
+    "netWorth": 240000
+  },
+  "composition": [
+    { "key": "Financial assets", "value": 16.7, "color": "var(--series-blue)" },
+    { "key": "Real assets (mainly housing)", "value": 83.3, "color": "var(--series-aqua)" }
+  ],
+  "compositionNote": "Share of gross assets for the illustrative household above, before subtracting debt.",
+  "stockFlow": [
+    { "name": "A surgeon, age 34", "income": 220000, "netWorth": 15000, "note": "high income, still paying off student debt and a new mortgage" },
+    { "name": "A retired shopkeeper, age 70", "income": 28000, "netWorth": 640000, "note": "modest pension income, decades of saved and appreciated assets" }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "source": "Illustrative example: $200 saved every month for 40 years, compared with the same $200/month invested at a 7% average annual return (compounded monthly, a common simplified long-run assumption for a diversified stock portfolio before inflation). Not investment advice.",
+  "monthlyContribution": 200,
+  "annualReturn": 0.07,
+  "years": 40,
+  "series": [
+    { "id": "saved", "label": "Just saved (no return)", "color": "var(--series-blue)",
+      "serie": [
+        { "x": "0", "y": 0 },
+        { "x": "5", "y": 12000 },
+        { "x": "10", "y": 24000 },
+        { "x": "15", "y": 36000 },
+        { "x": "20", "y": 48000 },
+        { "x": "25", "y": 60000 },
+        { "x": "30", "y": 72000 },
+        { "x": "35", "y": 84000 },
+        { "x": "40", "y": 96000 }
+      ] },
+    { "id": "grown", "label": "Saved and invested at 7%/yr", "color": "var(--series-yellow)",
+      "serie": [
+        { "x": "0", "y": 0 },
+        { "x": "5", "y": 14300 },
+        { "x": "10", "y": 34600 },
+        { "x": "15", "y": 63400 },
+        { "x": "20", "y": 104200 },
+        { "x": "25", "y": 162000 },
+        { "x": "30", "y": 244000 },
+        { "x": "35", "y": 360300 },
+        { "x": "40", "y": 524900 }
+      ] }
+  ]
+}

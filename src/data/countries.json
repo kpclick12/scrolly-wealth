@@ -1,0 +1,29 @@
+{
+  "source": "UBS/Credit Suisse Global Wealth Report 2023 (data year 2022). Median wealth per adult, USD, approximate and rounded — figures are illustrative approximations for this essay, not precise official statistics.",
+  "countries": [
+    { "name": "Belgium", "median": 250000 },
+    { "name": "Australia", "median": 247000 },
+    { "name": "Hong Kong", "median": 202000 },
+    { "name": "New Zealand", "median": 193000 },
+    { "name": "Denmark", "median": 186000 },
+    { "name": "Switzerland", "median": 168000 },
+    { "name": "United Kingdom", "median": 151000 },
+    { "name": "Norway", "median": 143000 },
+    { "name": "Canada", "median": 137000 },
+    { "name": "France", "median": 133000 },
+    { "name": "Netherlands", "median": 117000 },
+    { "name": "United States", "median": 108000 },
+    { "name": "Spain", "median": 108000 },
+    { "name": "Japan", "median": 107000 },
+    { "name": "Italy", "median": 107000 },
+    { "name": "Sweden", "median": 78000 },
+    { "name": "Germany", "median": 66000 },
+    { "name": "China", "median": 27000 },
+    { "name": "Russia", "median": 8000 },
+    { "name": "Brazil", "median": 6000 },
+    { "name": "Indonesia", "median": 5000 },
+    { "name": "India", "median": 4000 },
+    { "name": "Nigeria", "median": 1600 },
+    { "name": "Ethiopia", "median": 900 }
+  ]
+}

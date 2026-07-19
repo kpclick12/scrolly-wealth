@@ -1,0 +1,14 @@
+{
+  "source": "Ownership composition is an illustrative pattern consistent with billionaire wealth surveys (e.g. Forbes, UBS Billionaire Ambitions Report) showing equity ownership dominates large fortunes. Inheritance share is an approximate, order-of-magnitude figure informed by research on aggregate inherited wealth shares in rich economies (e.g. Piketty & Zucman, and related work compiled in the World Inequality Report) — treat as illustrative, not a precise global statistic.",
+  "topWealthComposition": [
+    { "key": "Business equity (ownership)", "value": 58, "color": "var(--series-blue)" },
+    { "key": "Real estate", "value": 17, "color": "var(--series-aqua)" },
+    { "key": "Financial assets", "value": 15, "color": "var(--series-violet)" },
+    { "key": "Other", "value": 10, "color": "var(--series-yellow)", "light": true }
+  ],
+  "inheritanceShare": [
+    { "key": "Inherited", "value": 55, "color": "var(--series-yellow)", "light": true },
+    { "key": "Accumulated within one's own lifetime", "value": 45, "color": "var(--series-blue)" }
+  ],
+  "inheritanceNote": "Approximate share of aggregate private wealth in several rich economies traced to inheritance rather than lifetime saving, illustrative order of magnitude for recent decades."
+}

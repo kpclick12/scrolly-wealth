@@ -1,0 +1,25 @@
+{
+  "source": "Birth shares: approximate, based on the order of magnitude of national shares of annual world births in UN World Population Prospects (~2022 estimates); regional 'rest' buckets are residuals after the named countries. Wealth figures: approximate, informed by the UBS/Credit Suisse Global Wealth Report 2023 (median & mean wealth per adult, USD; millionaires per 100 adults). Regional bucket wealth figures are rough regional averages, clearly weaker approximations than the named countries. All figures rounded and illustrative.",
+  "globalThresholds": { "richerHalf": 8700, "top10": 140000, "top1": 1100000 },
+  "entries": [
+    { "id": "india", "name": "India", "type": "country", "birthShare": 17, "median": 4000, "mean": 16000, "millionairesPer100": 0.1 },
+    { "id": "china", "name": "China", "type": "country", "birthShare": 7.5, "median": 27000, "mean": 74000, "millionairesPer100": 1.5 },
+    { "id": "nigeria", "name": "Nigeria", "type": "country", "birthShare": 5.5, "median": 1600, "mean": 7000, "millionairesPer100": 0.02 },
+    { "id": "pakistan", "name": "Pakistan", "type": "country", "birthShare": 4.8, "median": 3000, "mean": 9000, "millionairesPer100": 0.03 },
+    { "id": "drc", "name": "DR Congo", "type": "country", "birthShare": 3.3, "median": 700, "mean": 1500, "millionairesPer100": 0.01 },
+    { "id": "indonesia", "name": "Indonesia", "type": "country", "birthShare": 3.4, "median": 5000, "mean": 15000, "millionairesPer100": 0.1 },
+    { "id": "ethiopia", "name": "Ethiopia", "type": "country", "birthShare": 2.9, "median": 900, "mean": 1700, "millionairesPer100": 0.01 },
+    { "id": "us", "name": "United States", "type": "country", "birthShare": 2.7, "median": 108000, "mean": 550000, "millionairesPer100": 8.5 },
+    { "id": "bangladesh", "name": "Bangladesh", "type": "country", "birthShare": 2.7, "median": 3000, "mean": 8000, "millionairesPer100": 0.03 },
+    { "id": "brazil", "name": "Brazil", "type": "country", "birthShare": 1.9, "median": 6000, "mean": 26000, "millionairesPer100": 0.1 },
+    { "id": "philippines", "name": "Philippines", "type": "country", "birthShare": 1.7, "median": 4000, "mean": 11000, "millionairesPer100": 0.05 },
+    { "id": "egypt", "name": "Egypt", "type": "country", "birthShare": 1.6, "median": 5500, "mean": 15000, "millionairesPer100": 0.05 },
+    { "id": "mexico", "name": "Mexico", "type": "country", "birthShare": 1.4, "median": 16000, "mean": 50000, "millionairesPer100": 0.2 },
+    { "id": "japan", "name": "Japan", "type": "country", "birthShare": 0.6, "median": 107000, "mean": 230000, "millionairesPer100": 4.3 },
+    { "id": "ssa-rest", "name": "Rest of Sub-Saharan Africa", "type": "region", "birthShare": 15, "median": 1500, "mean": 3500, "millionairesPer100": 0.02 },
+    { "id": "asia-rest", "name": "Rest of Asia", "type": "region", "birthShare": 14, "median": 8000, "mean": 25000, "millionairesPer100": 0.3 },
+    { "id": "latam-rest", "name": "Rest of Latin America", "type": "region", "birthShare": 4, "median": 9000, "mean": 30000, "millionairesPer100": 0.3 },
+    { "id": "europe", "name": "Europe (incl. rest of Europe)", "type": "region", "birthShare": 6, "median": 60000, "mean": 160000, "millionairesPer100": 5 },
+    { "id": "world-rest", "name": "Rest of the world", "type": "region", "birthShare": 4, "median": 20000, "mean": 60000, "millionairesPer100": 1 }
+  ]
+}

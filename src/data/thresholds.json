@@ -1,0 +1,8 @@
+{
+  "source": "UBS/Credit Suisse Global Wealth Report 2023 (data year 2022), approximate global net worth thresholds.",
+  "thresholds": [
+    { "key": "Richer half of the world", "value": 8700 },
+    { "key": "Global top 10%", "value": 140000 },
+    { "key": "Global top 1%", "value": 1100000 }
+  ]
+}
