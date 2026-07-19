@@ -37,7 +37,12 @@
 </script>
 
 <figure class="island-fig">
-  <svg viewBox="0 0 {W} {H}" role="img" aria-label="An illustrated island whose population, trade and total wealth grow through the story">
+  <svg
+    viewBox="0 0 {W} {H}"
+    preserveAspectRatio="xMidYMid slice"
+    role="img"
+    aria-label="An illustrated island whose population, trade and total wealth grow through the story"
+  >
     <defs>
       <marker id="island-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
         <path d="M0,0 L10,5 L0,10 Z" fill="currentColor" />
@@ -176,15 +181,24 @@
     display: block;
   }
   @media (max-width: 860px) {
-    /* On the narrow mobile sticky panel, the step cards slide up and cover
-       the lower part of this visual — shrink the scene so the meter
-       underneath it (the one element that must stay visible at every step)
-       has room to clear that overlap. It's purely decorative on mobile, so
-       it can give up more room than a chart could: shrinking it further
-       frees up viewport budget for the step cards on short phones. */
+    /* The scene should read at the same full column width as the meter
+       above it, not shrink into a small centered box. Give it an explicit
+       CSS aspect-ratio (matching the viewBox) so width:100% and a
+       height cap can coexist without the browser back-solving a narrower
+       width to preserve the intrinsic SVG ratio — that back-solve is what
+       previously turned a height cap into a shrunk, centered box. On the
+       narrow mobile sticky panel the step cards also slide up and cover
+       the lower part of this visual, so a height cap still matters on
+       short phones: it's capped in svh so the meter underneath (the one
+       element that must stay visible at every step) always has room. The
+       `slice` preserveAspectRatio above crops sky/water at top and bottom
+       when the cap binds, instead of letterboxing the full width down to
+       a smaller, empty-sky-heavy box. */
     svg {
-      max-height: 92px;
-      margin: 0 auto;
+      aspect-ratio: 640 / 380;
+      height: auto;
+      max-height: clamp(150px, 30svh, 230px);
+      margin: 0;
     }
   }
   .water {
