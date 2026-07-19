@@ -1,0 +1,11 @@
+{
+  "source": "World Inequality Database (WID), approximate personal wealth shares, ~2022. Figures are rounded approximations for illustration. A negative bottom-50% share means that group's debts exceed its assets on average (net negative wealth); it is shown as a thin marked segment rather than a true negative width.",
+  "countries": [
+    { "name": "United States", "top1": 35, "top10": 70, "bottom50": 1.5 },
+    { "name": "France", "top1": 27, "top10": 59, "bottom50": 5 },
+    { "name": "China", "top1": 31, "top10": 68, "bottom50": 6 },
+    { "name": "India", "top1": 33, "top10": 65, "bottom50": 6 },
+    { "name": "Brazil", "top1": 46, "top10": 76, "bottom50": -0.4 },
+    { "name": "South Africa", "top1": 55, "top10": 86, "bottom50": -0.6 }
+  ]
+}

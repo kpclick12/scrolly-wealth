@@ -1,0 +1,140 @@
+/* Self-hosted font (GDPR-friendly — no third-party requests). Variable weight 400-900. */
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("/fonts/playfair-display-latin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Playfair Display";
+  font-style: italic;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("/fonts/playfair-display-latin-italic.woff2") format("woff2");
+}
+
+:root {
+  /* Warm paper identity: cream page, deep ink text, brass/gold accent. */
+  --surface-1: #fdfbf5;
+  --page-plane: #f6f0e3;
+  --text-primary: #201a12;
+  --text-secondary: #4a4032;
+  --text-muted: #8a7f68;
+  --gridline: #e6ddc7;
+  --baseline: #c9bd9d;
+  --border: rgba(32, 26, 18, 0.12);
+
+  /* Hero / narrative surfaces — deep ink with a brass accent. */
+  --hero-ink: #241d14;
+  --hero-ink-deep: #16110a;
+  --hero-gold: #d9a94a;
+  --hero-cream: #efe3c8;
+  /* Darker steps of the categorical hues, for use as TEXT on the light
+     paper surface — the chart-mark versions of blue/red don't clear
+     4.5:1 there. Dark mode's chart-mark colors already do, so they are
+     reused as-is inside the dark media query below. */
+  --ink-gold: #8a5a12;
+  --ink-blue: #184f95;
+  --ink-red: #a8291f;
+
+  --serif: "Playfair Display", Georgia, "Times New Roman", "Liberation Serif", serif;
+
+  /* Categorical chart palette: validated (dataviz skill) against the warm
+     surfaces above — fixed hue order, never cycled. */
+  --series-blue: #2a78d6;
+  --series-green: #008300;
+  --series-magenta: #e87ba4;
+  --series-yellow: #eda100;
+  --series-aqua: #1baf7a;
+  --series-orange: #eb6834;
+  --series-violet: #4a3aa7;
+  --series-red: #e34948;
+
+  --accent: var(--hero-gold);
+
+  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  font: 16px/1.55 var(--sans);
+  color-scheme: light dark;
+  color: var(--text-primary);
+  background: var(--page-plane);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface-1: #1c1811;
+    --page-plane: #14110c;
+    --text-primary: #f5efe0;
+    --text-secondary: #cabfa8;
+    --text-muted: #948a72;
+    --gridline: #2c2619;
+    --baseline: #443c2b;
+    --border: rgba(245, 239, 224, 0.12);
+
+    --hero-gold: #d9a94a;
+    --ink-gold: #e0b563;
+
+    --series-blue: #3987e5;
+    --series-green: #008300;
+    --series-magenta: #d55181;
+    --series-yellow: #c98500;
+    --series-aqua: #199e70;
+    --series-orange: #d95926;
+    --series-violet: #9085e9;
+    --series-red: #e66767;
+
+    --ink-blue: #3987e5;
+    --ink-red: #e66767;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+h1, h2, h3 {
+  font-family: var(--sans);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+/* Inline colored word — for callouts referencing a specific chart series. */
+.badge {
+  display: inline-block;
+  padding: 1px 8px;
+  font-weight: 700;
+  color: #ffffff;
+  border-radius: 2px;
+}
+.badge-gold {
+  background: var(--hero-gold);
+  color: #201a12;
+}
+.badge-red {
+  background: var(--series-red);
+}
+
+/* Respect the reduced-motion system setting. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "source": "UBS/Credit Suisse Global Wealth Report 2023 (data year 2022), global wealth pyramid. Figures are approximate and rounded.",
+  "tiers": [
+    { "key": "Under $10k", "adults": 53, "wealth": 1.2, "color": "var(--series-blue)" },
+    { "key": "$10k – $100k", "adults": 34, "wealth": 16.5, "color": "var(--series-aqua)" },
+    { "key": "$100k – $1M", "adults": 12, "wealth": 36.5, "color": "var(--series-yellow)", "light": true },
+    { "key": "Over $1M", "adults": 1.1, "wealth": 45.8, "color": "var(--hero-gold)", "light": true }
+  ]
+}
