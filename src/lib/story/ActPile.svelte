@@ -38,7 +38,7 @@
 
   <Scrolly onStepChange={(i) => (currentStep = i)}>
     {#snippet visual()}
-      <div class="visual-frame-stack" style="--stack-height:460px; --stack-height-mobile:380px;">
+      <div class="visual-frame-stack" style="--stack-height:460px; --stack-height-mobile:clamp(275px, 34svh, 380px);">
         <div class="frame" class:is-active={currentStep === 0}>
           <NetWorthDiagram assets={ex.assets} debts={ex.debts} netWorth={ex.netWorth} active={currentStep === 0} />
         </div>

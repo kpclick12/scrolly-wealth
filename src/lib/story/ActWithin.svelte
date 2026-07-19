@@ -45,7 +45,7 @@
 
   <Scrolly onStepChange={(i) => (currentStep = i)}>
     {#snippet visual()}
-      <div class="visual-frame-stack" style="--stack-height:480px; --stack-height-mobile:480px;">
+      <div class="visual-frame-stack" style="--stack-height:480px; --stack-height-mobile:clamp(460px, 40svh, 480px);">
         <div class="frame is-active">
           <Heatmap
             rows={rowNames}

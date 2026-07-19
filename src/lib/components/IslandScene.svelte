@@ -177,9 +177,11 @@
     /* On the narrow mobile sticky panel, the step cards slide up and cover
        the lower part of this visual — shrink the scene so the meter
        underneath it (the one element that must stay visible at every step)
-       has room to clear that overlap. */
+       has room to clear that overlap. It's purely decorative on mobile, so
+       it can give up more room than a chart could: shrinking it further
+       frees up viewport budget for the step cards on short phones. */
     svg {
-      max-height: 128px;
+      max-height: 92px;
       margin: 0 auto;
     }
   }
