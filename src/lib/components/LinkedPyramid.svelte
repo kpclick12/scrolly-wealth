@@ -274,13 +274,18 @@
     transition: opacity 0.4s ease;
   }
   .lp-bar-seg.dim {
-    opacity: 0.32;
+    /* Diverging fills wash toward the surface as opacity drops — 0.32 (the
+       old value, tuned for a one-hue ramp) let adjacent dimmed bands
+       collapse into each other. 0.48 keeps the two color families visibly
+       distinct while still reading as de-emphasized next to the
+       full-opacity highlighted band. */
+    opacity: 0.48;
   }
   .lp-dot {
     transition: opacity 0.4s ease;
   }
   .lp-dot.dim {
-    opacity: 0.32;
+    opacity: 0.48;
   }
   .lp-connector {
     stroke: var(--hero-gold);
