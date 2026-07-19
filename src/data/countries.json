@@ -19,11 +19,17 @@
     { "name": "Sweden", "median": 78000 },
     { "name": "Germany", "median": 66000 },
     { "name": "China", "median": 27000 },
+    { "name": "Mexico", "median": 16000 },
     { "name": "Russia", "median": 8000 },
     { "name": "Brazil", "median": 6000 },
+    { "name": "Egypt", "median": 5500 },
     { "name": "Indonesia", "median": 5000 },
     { "name": "India", "median": 4000 },
+    { "name": "Philippines", "median": 4000 },
+    { "name": "Pakistan", "median": 3000 },
+    { "name": "Bangladesh", "median": 3000 },
     { "name": "Nigeria", "median": 1600 },
-    { "name": "Ethiopia", "median": 900 }
+    { "name": "Ethiopia", "median": 900 },
+    { "name": "DR Congo", "median": 700 }
   ]
 }
