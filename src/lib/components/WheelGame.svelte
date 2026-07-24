@@ -236,6 +236,10 @@
               A typical adult here holds about <strong>{fmtMoney(e.median)}</strong>
               in net worth — that's {positionLabel(e)}, globally.
             </p>
+            <p class="vintage-note">
+              Wealth figures: UBS Global Wealth Report 2023 (data year 2022)
+              — see methodology.
+            </p>
           </div>
         {:else}
           <div class="result-placeholder">
@@ -443,6 +447,16 @@
     border-top: 1px solid rgba(255, 255, 255, 0.15);
     padding-top: 14px;
     margin: 0;
+  }
+  /* Small-print vintage disclosure — same white-on-ink pattern as the rest
+     of this dark section's caption text (see .result-kicker, .tally-list
+     above): a `--text-*` token is tuned for the warm-paper surfaces and
+     goes near-invisible here, so this sets its own color directly. */
+  .vintage-note {
+    font-size: 11px;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 10px 0 0;
   }
   .tally {
     font-size: 13px;

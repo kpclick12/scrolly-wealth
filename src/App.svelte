@@ -113,15 +113,17 @@
         approximate, as below.
       </li>
       <li>
-        <strong>Country wealth levels (Act Three's bar chart) and the
-        wheel's millionaire counts</strong> — UBS/Credit Suisse,
-        <em>Global Wealth Report 2023</em> (data year 2022). The newer
-        <em>Global Wealth Report 2026</em> (data year 2025) was published in
-        June 2026, but we could only independently verify a handful of its
-        roughly 30 countries and regions from press coverage — not enough to
-        replace this list without mixing two different years' figures side
-        by side. Those sections keep the 2022 data rather than ship a
-        half-updated table.
+        <strong>Country wealth levels</strong> — Act Three's bar chart, the
+        "Explore: where do you stand?" country dropdown's medians, and the
+        wheel's median, mean and millionaire-count figures per country — all
+        come from UBS/Credit Suisse, <em>Global Wealth Report 2023</em>
+        (data year 2022). The newer <em>Global Wealth Report 2026</em> (data
+        year 2025) was published in June 2026, but we could only
+        independently verify a handful of its roughly 30 countries and
+        regions from press coverage — not enough to replace this list
+        without mixing two different years' figures side by side. Those
+        sections keep the 2022 data rather than ship a half-updated table;
+        each one carries its own on-screen note saying so.
       </li>
       <li>
         <strong>The global wealth pyramid</strong> (Act Three's linked
@@ -172,8 +174,9 @@
       <li>
         The "Explore: where do you stand?" section's global percentile and
         ladder position are a rough, illustrative placement, log-interpolated
-        between a handful of approximate Global Wealth Report anchor points
-        (see <code>src/data/globalPercentiles.json</code>) — not an official
+        between a handful of approximate anchor points from UBS/Credit
+        Suisse, <em>Global Wealth Report 2023</em> (data year 2022) (see
+        <code>src/data/globalPercentiles.json</code>) — not an official
         percentile lookup — and, like the rest of the page, measured in USD
         at market exchange rates.
       </li>

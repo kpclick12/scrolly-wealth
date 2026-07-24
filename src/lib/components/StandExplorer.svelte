@@ -382,6 +382,10 @@
         in would land on a completely different rung of this ladder,
         depending only on where the wheel happened to stop.
       </p>
+      <p class="vintage-note">
+        Country medians and global thresholds: UBS Global Wealth Report 2023
+        (data year 2022) — see methodology.
+      </p>
     </div>
   </div>
 </section>
@@ -708,6 +712,17 @@
     border-top: 1px solid rgba(255, 255, 255, 0.15);
     padding-top: 16px;
     margin: 0;
+  }
+  /* Small-print vintage disclosure, same white-on-ink pattern used
+     throughout this dark section (see .wealth-readout, .label-value
+     above) — a `--text-*` token is tuned for the warm-paper surfaces and
+     goes near-invisible on this ink-navy card, so this sets its own color
+     directly. */
+  .vintage-note {
+    font-size: 11px;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 10px 0 0;
   }
 
   @media (max-width: 860px) {
