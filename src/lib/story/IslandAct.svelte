@@ -150,7 +150,7 @@
   .act {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 90px 24px 40px;
+    padding: 90px var(--act-pad-x) 40px;
   }
   .act-head {
     max-width: 640px;
@@ -249,6 +249,19 @@
       order: -1;
       margin-top: 0;
       margin-bottom: 10px;
+    }
+
+    /* Going full-bleed widened the card ~48px (see app.css's mobile
+       .scrolly-step), which reflows text at new line-break points. Steps
+       0/1/2/5/6 still land on matching heights, but step index 4 (kicker
+       "Fire") now wraps one line shorter than the rest and would stick
+       out as visibly shorter — the exact "uneven card" bug an earlier
+       pass fixed by trimming copy. A min-height floor is more robust than
+       tuning copy again: it holds every normal step at the same height
+       regardless of exact wrap points, while step index 3 (the toggle +
+       fork step) is naturally taller than this floor and is unaffected. */
+    .scrolly-step {
+      min-height: 278px;
     }
   }
 </style>

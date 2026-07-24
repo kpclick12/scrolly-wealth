@@ -84,7 +84,7 @@
   .act {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 40px 24px;
+    padding: 40px var(--act-pad-x);
   }
   .act-head {
     max-width: 640px;

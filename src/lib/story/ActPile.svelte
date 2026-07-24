@@ -113,7 +113,7 @@
   .act {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 40px 24px 100px;
+    padding: 40px var(--act-pad-x) 100px;
   }
   .act-head {
     max-width: 640px;

@@ -73,6 +73,13 @@
 
   --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
+  /* Horizontal inner padding every `.act` section uses (IslandAct.svelte,
+     ActReal.svelte, ActBetween.svelte, ActWithin.svelte, ActPile.svelte all
+     read this for their own `.act` padding). Kept as one shared value so
+     the mobile full-bleed math below (.scrolly-step) can cancel it exactly
+     without hardcoding the number in two places. */
+  --act-pad-x: 24px;
+
   font: 16px/1.55 var(--sans);
   color-scheme: light dark;
   color: var(--text-primary);
@@ -262,7 +269,25 @@ select:focus-visible,
 }
 @media (max-width: 860px) {
   .scrolly-step {
+    /* Full-bleed: break out of the parent `.act`'s horizontal padding so
+       the card spans edge-to-edge instead of sitting inset ~24px on each
+       side. The negative margin + width offset exactly cancels
+       --act-pad-x (every act's own .act padding reads that same
+       variable), so this stays correct even if that value ever changes.
+       Internal padding (below) is kept generous so text still clears the
+       accent bar and the screen edge by a comfortable margin. */
+    width: calc(100% + 2 * var(--act-pad-x));
+    margin-inline: calc(-1 * var(--act-pad-x));
     padding: 20px 20px;
+    /* Square corners at a hard screen edge — rounded corners flush against
+       the viewport edge read as a bug, not a design choice. */
+    border-radius: 0;
+    /* The card no longer gets a page-background gap on either side to read
+       as "a surface sitting on the page" — replace that cue with a hairline
+       top/bottom edge plus a touch more shadow depth. */
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 1px 0 rgba(32, 26, 18, 0.05), 0 4px 18px rgba(32, 26, 18, 0.14);
   }
   .scrolly-step h3 {
     font-size: 20px;
