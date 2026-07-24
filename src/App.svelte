@@ -64,6 +64,37 @@
 
 <StandExplorer countries={data.countries.countries} percentiles={data.globalPercentiles} />
 
+<section class="closing" aria-label="Closing thought">
+  <div class="closing-inner">
+    <p class="kicker">Last thought</p>
+    <h2>The pie keeps growing. The slices don't sort themselves.</h2>
+    <p>
+      The island never stopped growing. Trade, a better net, a first field,
+      a force nobody had harnessed before — each one let the same few
+      people produce more without anybody losing anything. The real world
+      did the same trick for two centuries running, and it's still doing it:
+      the global pie grew more than <strong>10% in 2025 alone</strong>. None
+      of that is in dispute.
+    </p>
+    <p>
+      How the harvest gets split is a separate question, and it was never
+      automatic. It's decided by rules someone wrote, land someone claimed,
+      a fifth islander who took instead of built — and, before any of that,
+      by which island you were born on at all. That's the one line worth
+      remembering: the single biggest input to your own slice wasn't a
+      choice you made. It was a coin-flip that landed before you could vote
+      on it.
+    </p>
+    <p>
+      That doesn't make the pie meaningless, and it isn't an argument for
+      standing still. It's just worth knowing which parts of where you
+      stand were earned and which were dealt. Spin the wheel again if you
+      want to feel that once more — or send it to someone else and see
+      where they land.
+    </p>
+  </div>
+</section>
+
 <section class="sources" aria-label="Methodology and sources">
   <div class="sources-inner">
     <h2>Methodology &amp; sources</h2>
@@ -82,9 +113,20 @@
         approximate, as below.
       </li>
       <li>
-        <strong>Wealth levels, the global pyramid, and millionaire
-        counts</strong> — UBS/Credit Suisse, <em>Global Wealth Report
-        2023</em> (data year 2022).
+        <strong>Country wealth levels (Act Three's bar chart) and the
+        wheel's millionaire counts</strong> — UBS/Credit Suisse,
+        <em>Global Wealth Report 2023</em> (data year 2022). The newer
+        <em>Global Wealth Report 2026</em> (data year 2025) was published in
+        June 2026, but we could only independently verify a handful of its
+        roughly 30 countries and regions from press coverage — not enough to
+        replace this list without mixing two different years' figures side
+        by side. Those sections keep the 2022 data rather than ship a
+        half-updated table.
+      </li>
+      <li>
+        <strong>The global wealth pyramid</strong> (Act Three's linked
+        pyramid chart, and the mean-vs-median finding in the same act) —
+        UBS, <em>Global Wealth Report 2026</em> (data year 2025).
       </li>
       <li>
         <strong>Within-country wealth shares</strong> (top 10%, top 1%,
@@ -232,6 +274,50 @@
   @keyframes bob {
     0%, 100% { transform: translateY(0); opacity: 0.4; }
     50% { transform: translateY(6px); opacity: 1; }
+  }
+
+  .closing {
+    background: var(--hero-ink);
+    padding: 90px 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .closing-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .closing .kicker {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--hero-gold);
+    font-weight: 700;
+    margin: 0 0 16px;
+  }
+  .closing h2 {
+    font-family: var(--serif);
+    font-size: clamp(26px, 4vw, 38px);
+    color: #ffffff;
+    margin: 0 0 24px;
+    line-height: 1.25;
+  }
+  .closing p:not(.kicker) {
+    font-size: 16px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.82);
+    text-align: left;
+    margin: 0 0 18px;
+  }
+  .closing p:not(.kicker):last-child {
+    margin-bottom: 0;
+  }
+  .closing strong {
+    color: var(--hero-gold);
+  }
+  @media (max-width: 860px) {
+    .closing {
+      padding: 60px 18px;
+    }
   }
 
   .sources {

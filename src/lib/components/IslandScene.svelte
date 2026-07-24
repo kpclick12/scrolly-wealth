@@ -7,13 +7,23 @@
   // end state instantly — Svelte's `in:` transitions aren't covered by the
   // CSS-level reduced-motion override in app.css, so they're gated here too.
   // figures: island.json's `figures` — [{ id, arrival, icon, color, label, pile:[7] }]
+  // Looping "alive" touches (trade-arrow pulse, fire flicker, energy glow)
+  // are plain CSS @keyframes animations gated only by the global
+  // prefers-reduced-motion override in app.css, which collapses every
+  // animation to a single, near-instant iteration — so reduced-motion users
+  // land on each animation's resting (0%/100%) frame instead of a mid-loop
+  // one, with no separate gating needed here.
   import { fly } from "svelte/transition";
+  import { backOut } from "svelte/easing";
 
   let { figures = [], step = 0, fifthState = "takes" } = $props();
 
   const reduced =
     typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const flyIn = reduced ? { duration: 0 } : { y: 16, duration: 480 };
+  // A gentle overshoot ("pop") on arrival reads as more alive than a flat
+  // fade — still just a transform+opacity tween, so it's as cheap as the
+  // plain fly it replaces.
+  const flyIn = reduced ? { duration: 0 } : { y: 20, duration: 620, easing: backOut };
 
   const W = 640;
   const H = 380;
@@ -82,8 +92,15 @@
 
     {#if isFire}
       <g class="flame" transform="translate(430,232)" in:fly={flyIn}>
-        <path class="flame-outer" d="M0,-26 C10,-14 12,-2 4,6 C8,0 6,-8 0,-14 C-6,-8 -8,0 -4,6 C-12,-2 -10,-14 0,-26 Z" />
-        <path class="flame-inner" d="M0,-14 C5,-7 6,-1 2,4 C4,-2 2,-8 0,-14 Z" />
+        <!-- Flicker lives on this inner group, never on the outer one that
+             carries the placement transform= attribute — a CSS transform
+             on an SVG element replaces a presentation transform attribute
+             rather than composing with it, so the wobble needs its own
+             untransformed layer to animate without breaking position. -->
+        <g class="flame-flicker">
+          <path class="flame-outer" d="M0,-26 C10,-14 12,-2 4,6 C8,0 6,-8 0,-14 C-6,-8 -8,0 -4,6 C-12,-2 -10,-14 0,-26 Z" />
+          <path class="flame-inner" d="M0,-14 C5,-7 6,-1 2,4 C4,-2 2,-8 0,-14 Z" />
+        </g>
       </g>
     {/if}
 
@@ -207,10 +224,19 @@
   .sun-halo {
     fill: var(--hero-gold);
     opacity: 0.16;
+    transform-box: fill-box;
+    transform-origin: 50% 50%;
     transition: r 0.8s ease, opacity 0.8s ease;
   }
   .sun.bright .sun-halo {
     opacity: 0.3;
+    /* Scale, not opacity/r, so this loop never fights the one-off
+       transitions above that fade the halo in when energy first arrives. */
+    animation: halo-glow 3.4s ease-in-out infinite;
+  }
+  @keyframes halo-glow {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.16); }
   }
   .sun-core {
     fill: var(--hero-gold);
@@ -262,15 +288,39 @@
   .flame-inner {
     fill: var(--series-yellow);
   }
+  .flame-flicker {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: flame-flicker 1.7s ease-in-out infinite;
+  }
+  /* 0%/100% is the resting frame reduced-motion users land on. */
+  @keyframes flame-flicker {
+    0%, 100% { transform: scale(1, 1) rotate(0deg); opacity: 1; }
+    22% { transform: scale(1.06, 0.94) rotate(-2.5deg); opacity: 0.96; }
+    48% { transform: scale(0.94, 1.07) rotate(2deg); opacity: 0.9; }
+    74% { transform: scale(1.03, 0.97) rotate(-1.5deg); opacity: 0.97; }
+  }
 
   .spark .bolt {
     fill: var(--hero-gold);
+    transform-box: fill-box;
+    transform-origin: 50% 50%;
+    animation: bolt-pulse 2.3s ease-in-out infinite;
+  }
+  @keyframes bolt-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.72; transform: scale(0.94); }
   }
 
   .trade .arrow {
     fill: none;
     stroke-width: 2.4;
     color: var(--series-blue);
+    animation: trade-pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes trade-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.55; }
   }
   .trade .fish-arrow {
     stroke: var(--series-blue);

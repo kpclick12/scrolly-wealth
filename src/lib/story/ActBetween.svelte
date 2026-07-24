@@ -82,7 +82,7 @@
           <LinkedPyramid
             {bands}
             highlight={pyramidHighlight}
-            caption="Left: each wealth band's share of global wealth. Right: the same band's share of the world's 100 adults. UBS/Credit Suisse Global Wealth Report 2023."
+            caption="Left: each wealth band's share of global wealth. Right: the same band's share of the world's 100 adults. UBS Global Wealth Report 2026 (data year 2025)."
           />
         </div>
       </div>
@@ -123,8 +123,8 @@
           <p>
             Zoom out to the whole planet. On the right, 100 dots stand in
             for every adult on Earth, grouped into the same four wealth
-            bands. Look at the bottom band: about <strong>53%</strong> of
-            adults — more than half the grid — own less than $10,000.
+            bands. Look at the bottom band: about <strong>41%</strong> of
+            adults — four in ten people on the grid — own less than $10,000.
           </p>
           <p>
             Now look left, at that same band's sliver on the wealth bar.
@@ -134,16 +134,29 @@
         {:else if i === 3}
           <p>
             Same bands, same dots — now follow the gold line to the top.
-            The <strong>dollar-millionaires</strong>, just over
-            <strong>1%</strong> of adults, are almost invisible on the
+            The <strong>dollar-millionaires</strong>, about
+            <strong>1.5%</strong> of adults, are almost invisible on the
             people grid. On the wealth bar, that same sliver of people fills
-            nearly <strong>half the bar</strong>.
+            close to <strong>half the bar</strong>.
           </p>
           <p>
-            About 1.1% of adults hold nearly half of all wealth. About 53%
-            share barely more than 1%. A handful of thresholds place anyone
-            on this pyramid, from the poorest islander to the richest — find
-            yours further down the page.
+            About 1.5% of adults hold close to half of all wealth. The
+            poorest 41% share less than one dollar in every hundred. A
+            handful of thresholds place anyone on this pyramid, from the
+            poorest islander to the richest — find yours further down the
+            page.
+          </p>
+          <p>
+            The newest edition of that report adds a twist worth sitting
+            with: in 2025 the global pie grew fast — average wealth per
+            adult worldwide rose more than <strong>10%</strong> in a single
+            year — yet <strong>median</strong> wealth, what the person in
+            the middle actually holds, fell in most of the 56 markets UBS
+            tracks. In the United States, average wealth per adult now tops
+            <strong>$696,000</strong>, while the typical adult holds under
+            <strong>$69,000</strong> — down from roughly $108,000 a few
+            years earlier. The mean moved one way. The median moved the
+            other. A bigger average says nothing about a typical slice.
           </p>
         {/if}
       </section>

@@ -20,10 +20,11 @@
     ]
   },
   "wealthGrowth": {
-    "source": "Nominal totals: UBS/Credit Suisse Global Wealth Report, aggregate global household wealth in current USD (2000 and 2022). Real figures are an approximate illustrative index built from the same reports' commentary on real (inflation-adjusted) wealth growth per adult — an order-of-magnitude figure, not a precisely deflated series.",
+    "source": "Nominal totals: UBS/Credit Suisse Global Wealth Report, aggregate global household wealth in current USD (2000 and 2022); the 2025 figure is our own estimate, back-computed from UBS Global Wealth Report 2026 figures reported in the press (the $100k-$1M wealth band held $184tn and 39.2% of global wealth, implying a total of roughly $469tn) rather than a total UBS stated outright. Real figures are an approximate illustrative index built from the same reports' commentary on real (inflation-adjusted) wealth growth per adult — an order-of-magnitude figure, not a precisely deflated series; we could not verify a comparable inflation-adjusted figure for 2025, so the real series stops at 2022.",
     "nominal": [
       { "label": "2000", "value": 117, "color": "var(--series-blue)" },
-      { "label": "2022", "value": 454, "color": "var(--hero-gold)", "light": true }
+      { "label": "2022", "value": 454, "color": "var(--series-blue)" },
+      { "label": "2025", "value": 469, "color": "var(--hero-gold)", "light": true }
     ],
     "real": [
       { "label": "2000", "value": 100, "color": "var(--series-blue)" },

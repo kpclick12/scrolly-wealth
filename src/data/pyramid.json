@@ -1,9 +1,9 @@
 {
-  "source": "UBS/Credit Suisse Global Wealth Report 2023 (data year 2022), global wealth pyramid. Figures are approximate and rounded.",
+  "source": "UBS Global Wealth Report 2026 (data year 2025), global wealth pyramid. Band boundaries (adults) and the $100k-$1M and Over-$1M wealth shares are drawn directly from figures UBS published and multiple outlets reported (e.g. 'just over 41%' of adults under $10,000; 628 million adults / $184tn / 39.2% of wealth in the $100k-$1M band; 1.5% of adults are dollar-millionaires holding about 48% of wealth). The $10k-$100k and Under-$10k wealth shares are our own residual estimate that makes the four bands sum to 100% of adults and 100% of wealth, since we could not verify those two figures directly. Figures are approximate and rounded.",
   "tiers": [
-    { "key": "Under $10k", "adults": 53, "wealth": 1.2, "color": "var(--pyramid-1)" },
-    { "key": "$10k – $100k", "adults": 34, "wealth": 16.5, "color": "var(--pyramid-2)" },
-    { "key": "$100k – $1M", "adults": 12, "wealth": 36.5, "color": "var(--pyramid-3)" },
-    { "key": "Over $1M", "adults": 1.1, "wealth": 45.8, "color": "var(--pyramid-4)" }
+    { "key": "Under $10k", "adults": 41.3, "wealth": 0.8, "color": "var(--pyramid-1)" },
+    { "key": "$10k – $100k", "adults": 40.9, "wealth": 12, "color": "var(--pyramid-2)" },
+    { "key": "$100k – $1M", "adults": 16.3, "wealth": 39.2, "color": "var(--pyramid-3)" },
+    { "key": "Over $1M", "adults": 1.5, "wealth": 48, "color": "var(--pyramid-4)" }
   ]
 }
