@@ -149,9 +149,13 @@
       </li>
       <li>
         <strong>Shares of world births</strong>, used to size the wheel —
-        United Nations, World Population Prospects, approximate recent
-        estimates. This measures a share of babies born today, not a share
-        of total population.
+        United Nations, <em>World Population Prospects 2024</em> revision,
+        2024 births by country, as shares of a 132,405,927 world total —
+        computed directly from country birth counts, not estimated. This
+        measures a share of babies born in a single year, not a share of
+        total population. Regional "rest of…" buckets remain residuals
+        (regional totals minus the named countries) and are a visibly
+        weaker approximation — see below.
       </li>
       <li>
         Wealth is measured in <strong>US dollars at market exchange
