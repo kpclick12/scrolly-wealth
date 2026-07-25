@@ -77,6 +77,14 @@
       of that is in dispute.
     </p>
     <p>
+      That growth has a floor-raising side, too, easy to miss next to every
+      figure about who owns the most: the share of the world's adults
+      holding less than <strong>$10,000</strong> in net wealth — the bottom
+      band of the pyramid above — fell from almost <strong>75%</strong> in
+      the year 2000 to just over <strong>41%</strong> in 2025. The bottom of
+      the pyramid is still crowded, but it's less crowded than it was.
+    </p>
+    <p>
       How the harvest gets split is a separate question, and it was never
       automatic. It's decided by rules someone wrote, land someone claimed,
       a fifth islander who took instead of built — and, before any of that,
@@ -115,20 +123,30 @@
       <li>
         <strong>Country wealth levels</strong> — Act Three's bar chart, the
         "Explore: where do you stand?" country dropdown's medians, and the
-        wheel's median, mean and millionaire-count figures per country — all
-        come from UBS/Credit Suisse, <em>Global Wealth Report 2023</em>
-        (data year 2022). The newer <em>Global Wealth Report 2026</em> (data
-        year 2025) was published in June 2026, but we could only
-        independently verify a handful of its roughly 30 countries and
-        regions from press coverage — not enough to replace this list
-        without mixing two different years' figures side by side. Those
-        sections keep the 2022 data rather than ship a half-updated table;
-        each one carries its own on-screen note saying so.
+        wheel's median, mean and millionaire-count figures per country — are
+        a mix of vintages, not one single report. UBS's <em>Global Wealth
+        Report 2026</em> (data year 2025) covers 56 markets holding over
+        <strong>92%</strong> of the world's wealth, and publishes a top-30
+        table by median and by average wealth; we verified the
+        <strong>United States</strong> ($68,998 median) and
+        <strong>Japan</strong> ($135,745 median) directly against that table
+        and updated them here. Every other market in that 56 still uses the
+        older approximation from UBS/Credit Suisse, <em>Global Wealth Report
+        2023</em> (data year 2022), not yet updated to the 2026 edition.
+        And several of the highest-birth countries on the wheel —
+        <strong>Nigeria, Pakistan, DR Congo, Ethiopia, Bangladesh, the
+        Philippines and Egypt</strong> — fall outside those 56 markets
+        entirely, so their wealth figures cannot be sourced to any current
+        UBS report at all; they're unverified, order-of-magnitude estimates,
+        and the wheel flags each of them on-screen when you land there.
       </li>
       <li>
         <strong>The global wealth pyramid</strong> (Act Three's linked
-        pyramid chart, and the mean-vs-median finding in the same act) —
-        UBS, <em>Global Wealth Report 2026</em> (data year 2025).
+        pyramid chart, and the mean-vs-median finding in the same act), the
+        falling under-$10,000 share and the millionaire/billionaire
+        concentration by country (closing section and Act Three), and the
+        note that housing dominates most households' balance sheets (Act
+        Five) — UBS, <em>Global Wealth Report 2026</em> (data year 2025).
       </li>
       <li>
         <strong>Within-country wealth shares</strong> (top 10%, top 1%,

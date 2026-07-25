@@ -383,8 +383,9 @@
         depending only on where the wheel happened to stop.
       </p>
       <p class="vintage-note">
-        Country medians and global thresholds: UBS Global Wealth Report 2023
-        (data year 2022) — see methodology.
+        Country medians: mostly UBS Global Wealth Report 2023 (data year
+        2022); United States and Japan use the newer, verified 2026 edition
+        (data year 2025). Global thresholds: 2023 edition. See methodology.
       </p>
     </div>
   </div>

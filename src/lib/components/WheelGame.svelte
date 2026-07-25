@@ -236,10 +236,18 @@
               A typical adult here holds about <strong>{fmtMoney(e.median)}</strong>
               in net worth — that's {positionLabel(e)}, globally.
             </p>
-            <p class="vintage-note">
-              Wealth figures: UBS Global Wealth Report 2023 (data year 2022)
-              — see methodology.
-            </p>
+            {#if e.wealthUnverified}
+              <p class="vintage-note">
+                {e.name}'s wealth figure is an unverified estimate — the
+                current UBS report doesn't cover this market — see methodology.
+              </p>
+            {:else}
+              <p class="vintage-note">
+                Wealth figures: mostly UBS Global Wealth Report 2023 (data
+                year 2022); United States and Japan use the newer, verified
+                2026 edition (data year 2025) — see methodology.
+              </p>
+            {/if}
           </div>
         {:else}
           <div class="result-placeholder">

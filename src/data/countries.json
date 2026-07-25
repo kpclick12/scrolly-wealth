@@ -1,5 +1,5 @@
 {
-  "source": "UBS/Credit Suisse Global Wealth Report 2023 (data year 2022). Median wealth per adult, USD, approximate and rounded — figures are illustrative approximations for this essay, not precise official statistics.",
+  "source": "Median wealth per adult, USD, approximate and rounded — figures are illustrative approximations for this essay, not precise official statistics. Figures are a mix of vintages: United States and Japan use the verified figure from UBS's own Global Wealth Report 2026 (data year 2025) top-30 table; every other country here uses the older approximation informed by UBS/Credit Suisse Global Wealth Report 2023 (data year 2022), not yet updated to the 2026 edition. Nigeria, Pakistan, DR Congo, Ethiopia, Bangladesh, Philippines and Egypt fall outside the 56 markets the current UBS Global Wealth Report 2026 covers, so their figures here are unverified, order-of-magnitude estimates rather than sourced to any current UBS report.",
   "countries": [
     { "name": "Belgium", "median": 250000 },
     { "name": "Australia", "median": 247000 },
@@ -12,9 +12,9 @@
     { "name": "Canada", "median": 137000 },
     { "name": "France", "median": 133000 },
     { "name": "Netherlands", "median": 117000 },
-    { "name": "United States", "median": 108000 },
+    { "name": "United States", "median": 68998 },
     { "name": "Spain", "median": 108000 },
-    { "name": "Japan", "median": 107000 },
+    { "name": "Japan", "median": 135745 },
     { "name": "Italy", "median": 107000 },
     { "name": "Sweden", "median": 78000 },
     { "name": "Germany", "median": 66000 },

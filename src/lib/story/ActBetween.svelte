@@ -103,8 +103,10 @@
           </p>
           <p>
             That's not the top 1% versus everyone else. That's the ordinary,
-            middle-of-the-pack person in each place. Figures are approximate
-            (UBS/Credit Suisse Global Wealth Report 2023, data year 2022).
+            middle-of-the-pack person in each place. Figures are approximate;
+            most are from UBS/Credit Suisse Global Wealth Report 2023 (data
+            year 2022) — the United States and Japan instead use the newer,
+            verified 2026 edition (data year 2025).
           </p>
         {:else if i === 1}
           <p>
@@ -157,6 +159,14 @@
             <strong>$69,000</strong> — down from roughly $108,000 a few
             years earlier. The mean moved one way. The median moved the
             other. A bigger average says nothing about a typical slice.
+          </p>
+          <p>
+            That top sliver is lopsided by country, too: over
+            <strong>40%</strong> of the world's roughly
+            <strong>57.5 million</strong> dollar-millionaires — 23.6 million
+            of them — live in the United States alone, and of the world's
+            <strong>3,302</strong> dollar-billionaires, the US has over
+            1,000, mainland China 562, and India 211.
           </p>
         {/if}
       </section>

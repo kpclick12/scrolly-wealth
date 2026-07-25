@@ -91,7 +91,11 @@
             fortunes rarely do. Most of the world's largest personal
             fortunes sit almost entirely in one asset: <strong>ownership</strong>
             — equity in a business that keeps compounding whether or not
-            its owner draws a salary.
+            its owner draws a salary. Most other households own something
+            different: up to the $1–5 million level, a home is usually the
+            dominant asset on the balance sheet, which UBS notes "can limit
+            participation in market-driven gains" the way equity ownership
+            doesn't.
           </p>
           <p>
             And a lot of that ownership was never earned by the person
