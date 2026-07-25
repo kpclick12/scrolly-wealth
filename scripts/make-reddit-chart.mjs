@@ -162,7 +162,7 @@ const wealthRowsHtml = wealth
 const TITLE =
   "More than half the world&rsquo;s babies are born in these ten countries. Only one of them ranks among the world&rsquo;s 30 richest by median wealth.";
 const SUBTITLE =
-  "Median wealth is what the typical adult actually owns &mdash; not the average, which a handful of billionaires drag upward. Births: 2024. Wealth: 2025.";
+  "Median wealth is what the typical adult actually owns &mdash; not the average, which a handful of billionaires drag upward. Ranking covers the 56 markets UBS analyses, holding over 92% of world wealth. Births: 2024. Wealth: 2025.";
 const SOURCE_LINE =
   "Sources: UN World Population Prospects 2024 revision (2024 births, share of 132,405,927 world total) · UBS Global Wealth Report 2026 (median wealth per adult, 2025, USD at market exchange rates)";
 
