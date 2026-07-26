@@ -88,6 +88,7 @@ src/
     components/            Scrolly.svelte, StatTiles.svelte, one file per chart
     story/Act*.svelte      one file per act
     data/load.js           static imports, re-exported as one `appData` object
+    actions/               shared behaviours: inView, resize, checkOverlap
 scripts/                   share-image generator, any data prep
 ```
 
@@ -313,6 +314,26 @@ const showEurope = $derived(step >= 1);   // step gates progressive reveal
   pixels. Compute the minimum gap from the container's measured `clientWidth`,
   assign lanes in priority order so the marks that carry the point get the clear
   lane, and put it in one shared helper.
+
+### Extract to `lib/actions/` on the second use
+
+Charts in this format keep needing the same handful of behaviours: measure a
+container, know whether an element is on screen, keep labels from overlapping,
+react to a resize. Written inline they get re-derived per component and each copy
+develops its own bugs — `scrolly-wealth` has a `ResizeObserver` inline in
+`BlockTower.svelte` and collision logic written twice, and the second copy
+repeated the first copy's mobile mistake because there was nothing shared to fix.
+
+The trigger is the **second** time you need a behaviour, not the third and not a
+speculative first. At that point pull it into a Svelte action or a small
+`lib/actions/` module and have both callers use it. `inView`, `resize` and
+`checkOverlap` are the three that have earned their place so far; The Pudding's
+starter ships exactly these, which is a decent signal they're the right set.
+
+Actions are also the cheapest place to get mobile right once: a helper that
+takes measured pixels rather than percentages fixes every caller at once,
+whereas an inline percentage looks fine on a desktop test window in every
+component that has its own copy.
 
 ## Writing the story
 
