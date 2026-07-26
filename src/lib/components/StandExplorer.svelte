@@ -192,6 +192,9 @@
 
   // ---- Centerpiece axis: $100 .. $10M, log scale ---------------------------
   const axisScale = scaleLog().domain([AXIS_MIN, AXIS_MAX]).range([0, 100]).clamp(true);
+  // A log axis has no room for zero or negative wealth, so those sit at the
+  // left edge and the marker carries an off-scale arrow instead.
+  const clampToAxis = (v) => Math.min(Math.max(v <= 0 ? AXIS_MIN : v, AXIS_MIN), AXIS_MAX);
   const AXIS_TICK_VALUES = [100, 1000, 10000, 100000, 1000000, 10000000];
   const axisTicks = AXIS_TICK_VALUES.map((v) => ({ label: fmtTickLabel(v), pct: axisScale(v) }));
   function fmtTickLabel(v) {
@@ -208,9 +211,39 @@
   // pick of the least-crowded lanes, since their juxtaposition is the point
   // of this whole visual. The three fixed global reference points fill in
   // around them.
+  // The slider defaults to the selected country's median, which lands YOU and
+  // the typical adult on the identical point — two dots drawn on top of each
+  // other, so one is simply invisible and it reads as a rendering fault. That
+  // coincidence is worth naming rather than nudging apart: standing exactly
+  // where the typical adult stands is the most legible thing this axis can
+  // say, and it's the first state every reader sees.
+  const COINCIDE_PX = 14;
+  const youCountryCoincide = $derived.by(() => {
+    if (!(countryMedian > 0) || !(wealth > 0)) return false;
+    const gapPct = Math.abs(axisScale(clampToAxis(wealth)) - axisScale(clampToAxis(countryMedian)));
+    const gapPx = axisPxWidth > 0 ? (gapPct / 100) * axisPxWidth : gapPct * 4;
+    return gapPx < COINCIDE_PX;
+  });
+
   const markers = $derived([
-    { id: "you", role: "you", label: "YOU", value: wealth, color: "var(--hero-gold)" },
-    { id: "country", role: "country", label: `Typical adult, ${selectedCountry}`, value: countryMedian, color: "var(--series-aqua)" },
+    ...(youCountryCoincide
+      ? [{
+          id: "you",
+          role: "you",
+          merged: true,
+          // The country is already named in the sentence directly above this
+          // axis, so repeating it here only made the label wide enough to clip
+          // off the right edge of a 360px card. This length is comparable to
+          // the "Typical adult, United States" label it replaces, which the
+          // lane logic already fits.
+          label: "YOU — also the typical adult",
+          value: wealth,
+          color: "var(--hero-gold)",
+        }]
+      : [
+          { id: "you", role: "you", label: "YOU", value: wealth, color: "var(--hero-gold)" },
+          { id: "country", role: "country", label: `Typical adult, ${selectedCountry}`, value: countryMedian, color: "var(--series-aqua)" },
+        ]),
     { id: "gmedian", role: "global", label: "Global median adult", value: globalMedianValue, color: "rgba(255,255,255,0.6)" },
     { id: "gtop10", role: "global", label: "Global top 10%", value: globalTop10Value, color: "rgba(255,255,255,0.6)" },
     { id: "gtop1", role: "global", label: "Global top 1%", value: globalTop1Value, color: "rgba(255,255,255,0.6)" },
@@ -241,8 +274,7 @@
     const out = [];
     for (const m of markers) {
       const raw = m.value;
-      const clampedValue = Math.min(Math.max(raw <= 0 ? AXIS_MIN : raw, AXIS_MIN), AXIS_MAX);
-      const p = axisScale(clampedValue);
+      const p = axisScale(clampToAxis(raw));
       const halfWidthPx = estimateHalfWidthPx(m.label, fmtMoney(m.value));
       const halfWidthPct = axisPxWidth > 0 ? (halfWidthPx / axisPxWidth) * 100 : 12;
       const padPct = axisPxWidth > 0 ? (GAP_PAD_PX / axisPxWidth) * 100 : 2;
@@ -353,6 +385,7 @@
           {#each laidOut as m (m.id)}
             <div
               class="marker marker-{m.role}"
+              class:is-merged={m.merged}
               class:edge-start={m.pct < 8}
               class:edge-end={m.pct > 92}
               data-side={m.lane.side}
@@ -626,6 +659,23 @@
     width: 15px;
     height: 15px;
     box-shadow: 0 0 0 4px rgba(217, 169, 74, 0.25);
+  }
+  /* When your wealth sits on the country's median the two markers become one,
+     so the dot carries both identities: gold core for you, an aqua ring for
+     the typical adult. Without the ring the merge looks like the country
+     marker simply vanished. */
+  .marker.marker-you.is-merged .dot {
+    box-shadow:
+      0 0 0 3px var(--series-aqua),
+      0 0 0 7px rgba(217, 169, 74, 0.22);
+  }
+  /* Deliberately NOT allowed to wrap. A marker is a zero-width absolutely
+     positioned anchor, so `white-space: normal` gives its label no width to
+     wrap against — it collapses to one word per line and climbs into the tier
+     above. Keeping the label on one line and short enough to fit is the
+     working answer; the lane logic already sizes gaps from label length. */
+  .marker.marker-you.is-merged .label-name {
+    white-space: nowrap;
   }
   .marker .stem {
     position: absolute;
