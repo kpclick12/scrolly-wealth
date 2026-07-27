@@ -1,5 +1,5 @@
 {
-  "source": "Birth shares: verified against the UN World Population Prospects 2024 revision, 2024 births by country, as shares of a 132,405,927 world total for 2024 — computed directly from country birth counts, not estimated (e.g. India 23,186,978; China 8,822,056; Nigeria 7,560,407). Regional 'rest' buckets (ssa-rest, asia-rest, latam-rest, europe, world-rest) are residuals — regional UN WPP 2024 birth totals minus the named countries inside each region — and are weaker approximations than the named-country figures, rounded so all shares sum to exactly 100%. Wealth figures are a mix of vintages: the median and mean wealth figures for United States and Japan are the verified figures from UBS's own Global Wealth Report 2026 (data year 2025) top-30 table; every other wealth figure here — median, mean and millionaires-per-100 for every entry, including the United States' and Japan's own mean and millionaire figures — remains the older approximation informed by the UBS/Credit Suisse Global Wealth Report 2023 (data year 2022), and has NOT been updated to the 2026 edition. Nigeria, Pakistan, DR Congo, Ethiopia, Bangladesh, Philippines and Egypt fall outside the 56 markets the current UBS Global Wealth Report 2026 covers, so their wealth figures cannot be sourced to any current UBS report at all — they are unverified, order-of-magnitude estimates, individually marked with 'wealthUnverified: true' below. Regional bucket wealth figures are rough regional averages, clearly weaker approximations than the named countries. All wealth figures rounded and illustrative.",
+  "source": "Birth shares: verified against the UN World Population Prospects 2024 revision, 2024 births by country, as shares of a 132,405,927 world total for 2024 — computed directly from country birth counts, not estimated (e.g. India 23,186,978; China 8,822,056; Nigeria 7,560,407). Regional 'rest' buckets (ssa-rest, asia-rest, latam-rest, europe, world-rest) are residuals — regional UN WPP 2024 birth totals minus the named countries inside each region — and are weaker approximations than the named-country figures, rounded so all shares sum to exactly 100%. Millionaire counts: read directly from the UBS Millionaire Index in the Global Wealth Report 2026 (data year 2025), which publishes counts for 34 markets; millionaireShareOfWorld is that count over the report's own 57.5 million world sample total. Entries without a 'millionaires' key are markets for which UBS publishes no count, and the UI says so rather than showing a derived figure — an earlier version divided counts by unsourced adult populations and was wrong by up to 3x. Median and mean wealth: a mix of vintages. United States (68,998 / 696,277) and Japan (135,745 / 211,846) are the verified figures from the 2026 report's own top-30 table. Every other market UBS covers still uses the older approximation informed by UBS/Credit Suisse Global Wealth Report 2023 (data year 2022), not yet updated. Nigeria, Pakistan, DR Congo, Ethiopia, Bangladesh, the Philippines and Egypt fall outside the 56 markets UBS analyses entirely, so their wealth figures are unverified order-of-magnitude estimates and are flagged wealthUnverified. Wealth throughout means net worth per adult — assets minus debts — in USD at market exchange rates. All figures rounded.",
   "globalThresholds": {
     "richerHalf": 8700,
     "top10": 140000,
@@ -13,7 +13,8 @@
       "birthShare": 17.5,
       "median": 4000,
       "mean": 16000,
-      "millionairesPer100": 0.1
+      "millionaires": 944000,
+      "millionaireShareOfWorld": 1.6
     },
     {
       "id": "china",
@@ -22,7 +23,8 @@
       "birthShare": 6.7,
       "median": 27000,
       "mean": 74000,
-      "millionairesPer100": 1.5
+      "millionaires": 5305000,
+      "millionaireShareOfWorld": 9.2
     },
     {
       "id": "nigeria",
@@ -31,7 +33,6 @@
       "birthShare": 5.7,
       "median": 1600,
       "mean": 7000,
-      "millionairesPer100": 0.02,
       "wealthUnverified": true
     },
     {
@@ -41,7 +42,6 @@
       "birthShare": 5.3,
       "median": 3000,
       "mean": 9000,
-      "millionairesPer100": 0.03,
       "wealthUnverified": true
     },
     {
@@ -51,7 +51,6 @@
       "birthShare": 3.4,
       "median": 700,
       "mean": 1500,
-      "millionairesPer100": 0.01,
       "wealthUnverified": true
     },
     {
@@ -60,8 +59,7 @@
       "type": "country",
       "birthShare": 3.4,
       "median": 5000,
-      "mean": 15000,
-      "millionairesPer100": 0.1
+      "mean": 15000
     },
     {
       "id": "ethiopia",
@@ -70,7 +68,6 @@
       "birthShare": 3.1,
       "median": 900,
       "mean": 1700,
-      "millionairesPer100": 0.01,
       "wealthUnverified": true
     },
     {
@@ -80,7 +77,8 @@
       "birthShare": 2.7,
       "median": 68998,
       "mean": 696277,
-      "millionairesPer100": 8.5
+      "millionaires": 23627000,
+      "millionaireShareOfWorld": 41.1
     },
     {
       "id": "bangladesh",
@@ -89,7 +87,6 @@
       "birthShare": 2.6,
       "median": 3000,
       "mean": 8000,
-      "millionairesPer100": 0.03,
       "wealthUnverified": true
     },
     {
@@ -99,7 +96,8 @@
       "birthShare": 1.9,
       "median": 6000,
       "mean": 26000,
-      "millionairesPer100": 0.1
+      "millionaires": 386000,
+      "millionaireShareOfWorld": 0.7
     },
     {
       "id": "philippines",
@@ -108,7 +106,6 @@
       "birthShare": 1.4,
       "median": 4000,
       "mean": 11000,
-      "millionairesPer100": 0.05,
       "wealthUnverified": true
     },
     {
@@ -118,7 +115,6 @@
       "birthShare": 1.8,
       "median": 5500,
       "mean": 15000,
-      "millionairesPer100": 0.05,
       "wealthUnverified": true
     },
     {
@@ -128,7 +124,8 @@
       "birthShare": 1.5,
       "median": 16000,
       "mean": 50000,
-      "millionairesPer100": 0.2
+      "millionaires": 333000,
+      "millionaireShareOfWorld": 0.6
     },
     {
       "id": "japan",
@@ -137,7 +134,8 @@
       "birthShare": 0.6,
       "median": 135745,
       "mean": 211846,
-      "millionairesPer100": 4.3
+      "millionaires": 2902000,
+      "millionaireShareOfWorld": 5.0
     },
     {
       "id": "ssa-rest",
@@ -145,8 +143,7 @@
       "type": "region",
       "birthShare": 18.5,
       "median": 1500,
-      "mean": 3500,
-      "millionairesPer100": 0.02
+      "mean": 3500
     },
     {
       "id": "asia-rest",
@@ -154,8 +151,7 @@
       "type": "region",
       "birthShare": 12.0,
       "median": 8000,
-      "mean": 25000,
-      "millionairesPer100": 0.3
+      "mean": 25000
     },
     {
       "id": "latam-rest",
@@ -163,8 +159,7 @@
       "type": "region",
       "birthShare": 3.6,
       "median": 9000,
-      "mean": 30000,
-      "millionairesPer100": 0.3
+      "mean": 30000
     },
     {
       "id": "europe",
@@ -172,8 +167,7 @@
       "type": "region",
       "birthShare": 4.8,
       "median": 60000,
-      "mean": 160000,
-      "millionairesPer100": 5
+      "mean": 160000
     },
     {
       "id": "world-rest",
@@ -181,8 +175,8 @@
       "type": "region",
       "birthShare": 3.5,
       "median": 20000,
-      "mean": 60000,
-      "millionairesPer100": 1
+      "mean": 60000
     }
-  ]
+  ],
+  "millionaireWorldTotal": 57500000
 }

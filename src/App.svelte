@@ -121,9 +121,28 @@
         approximate, as below.
       </li>
       <li>
+        <strong>"Wealth" here always means net worth per adult</strong> —
+        everything a person owns (savings, investments, pensions, property)
+        minus everything they owe. Not income, and not gross assets. A
+        "dollar-millionaire" is someone whose net worth passes $1 million on
+        that same definition, so the wheel's millionaire figures and its wealth
+        figures measure the same thing.
+      </li>
+      <li>
+        <strong>Millionaire counts</strong> — the wheel's "dollar-millionaires
+        living here" figure is read straight from the UBS Millionaire Index in
+        the <em>Global Wealth Report 2026</em> (data year 2025), which publishes
+        counts for 34 markets; the share beside it is that count over the
+        report's own <strong>57.5 million</strong> world total. Where UBS
+        publishes no count — including Indonesia and every regional bucket — the
+        wheel says "not published" rather than showing a number. An earlier
+        version divided those counts by adult populations we had no source for,
+        and some of the resulting odds were wrong by as much as threefold.
+      </li>
+      <li>
         <strong>Country wealth levels</strong> — Act Three's bar chart, the
         "Explore: where do you stand?" country dropdown's medians, and the
-        wheel's median, mean and millionaire-count figures per country — are
+        wheel's median and mean figures per country — are
         a mix of vintages, not one single report. UBS's <em>Global Wealth
         Report 2026</em> (data year 2025) covers 56 markets holding over
         <strong>92%</strong> of the world's wealth, and publishes a top-30

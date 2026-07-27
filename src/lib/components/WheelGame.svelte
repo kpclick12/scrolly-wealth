@@ -2,7 +2,10 @@
   import { onMount } from "svelte";
   import { gsap } from "gsap";
 
-  // wheel.json: { globalThresholds, entries: [{ id, name, type, birthShare, median, mean, millionairesPer100 }] }
+  // wheel.json: { globalThresholds, millionaireWorldTotal, entries: [{ id, name,
+  //   type, birthShare, median, mean, millionaires?, millionaireShareOfWorld?,
+  //   wealthUnverified? }] } — the millionaire keys are absent for markets UBS
+  //   publishes no count for, which the result card reports rather than fills in.
   let { data } = $props();
 
   const entries = $derived(data.entries);
@@ -158,10 +161,18 @@
     return "in the poorer half of the world";
   }
 
-  function millionaireOdds(entry) {
-    if (entry.millionairesPer100 <= 0) return "essentially none";
-    const oneIn = Math.round(100 / entry.millionairesPer100);
-    return `about 1 in ${oneIn.toLocaleString("en-US")}`;
+  // This used to show odds per 100 adults, which meant dividing a millionaire
+  // count by an adult population we had no source for — and several came out
+  // badly wrong (China was about three times too generous). UBS publishes the
+  // counts themselves, and the world sample total, so both numbers here are
+  // read straight from the report with no denominator we have to invent.
+  function millionaireCount(entry) {
+    const n = entry.millionaires;
+    if (n >= 1_000_000) {
+      const m = n / 1_000_000;
+      return `${m % 1 === 0 ? m : m.toFixed(1)} million`;
+    }
+    return n.toLocaleString("en-US");
   }
 </script>
 
@@ -227,10 +238,20 @@
                 <dt>Mean wealth per adult</dt>
                 <dd>{fmtMoney(e.mean)}</dd>
               </div>
-              <div>
-                <dt>Odds of being a dollar-millionaire</dt>
-                <dd>{millionaireOdds(e)}</dd>
-              </div>
+              {#if e.millionaires}
+                <div>
+                  <dt>Dollar-millionaires living here</dt>
+                  <dd>
+                    {millionaireCount(e)}
+                    <span class="stat-aside">{e.millionaireShareOfWorld}% of the world's</span>
+                  </dd>
+                </div>
+              {:else}
+                <div>
+                  <dt>Dollar-millionaires living here</dt>
+                  <dd class="stat-absent">not published</dd>
+                </div>
+              {/if}
             </dl>
             <p class="result-sentence">
               A typical adult here holds about <strong>{fmtMoney(e.median)}</strong>
@@ -238,12 +259,20 @@
             </p>
             {#if e.wealthUnverified}
               <p class="vintage-note">
-                {e.name}'s wealth figure is an unverified estimate — the
-                current UBS report doesn't cover this market — see methodology.
+                {e.name}'s wealth figure is an unverified estimate, and UBS
+                publishes no millionaire count for it — the current report
+                doesn't cover this market — see methodology.
+              </p>
+            {:else if !e.millionaires}
+              <p class="vintage-note">
+                Wealth figures: UBS Global Wealth Report 2023 (data year
+                2022). UBS publishes no separate millionaire count for
+                {e.name} — see methodology.
               </p>
             {:else}
               <p class="vintage-note">
-                Wealth figures: mostly UBS Global Wealth Report 2023 (data
+                Millionaire counts: UBS Global Wealth Report 2026 (data year
+                2025). Median and mean: mostly UBS Global Wealth Report 2023 (data
                 year 2022); United States and Japan use the newer, verified
                 2026 edition (data year 2025) — see methodology.
               </p>
@@ -447,6 +476,23 @@
     font-weight: 700;
     color: #ffffff;
     font-variant-numeric: tabular-nums;
+  }
+  /* The share-of-world figure supports the count rather than competing with
+     it, so it drops out of the serif display size into small sans caps-height
+     text on the line below. */
+  .result-stats .stat-aside {
+    display: block;
+    margin-top: 2px;
+    font-family: var(--sans);
+    font-size: 11.5px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .result-stats dd.stat-absent {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
   }
   .result-sentence {
     font-size: 14.5px;
