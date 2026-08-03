@@ -1,6 +1,6 @@
 ---
 name: scrollytelling
-description: Build a scrollytelling visual essay — a scroll-driven data story with a sticky visual panel, narrative acts, hand-built SVG charts, and an optional 3D hero. Use when asked for a scrollytelling piece, a visual essay, a scroll-driven data story, "a scrolly", or when working in any scrolly-* repo. Also use it when debugging one from a symptom alone ("the chart jumps when I scroll", "the text is cut off on my phone", "the cards are different sizes"), when sourcing or citing the figures in one, and when preparing a piece for publication or sharing it on a social platform.
+description: Build a scrollytelling visual essay — a scroll-driven data story that explains its subject through a familiar analogy (a board game, a known theory, a film), with a sticky visual panel, hand-built SVG charts, and an optional 3D hero. Starts with a planning pass on the conceit before any code. Use when asked for a scrollytelling piece, a visual essay, a scroll-driven data story, "a scrolly", or when working in any scrolly-* repo. Also use it when debugging one from a symptom alone ("the chart jumps when I scroll", "the text is cut off on my phone", "the cards are different sizes"), when sourcing or citing the figures in one, and when preparing a piece for publication or sharing it on a social platform.
 ---
 
 # Scrollytelling
@@ -10,7 +10,7 @@ skeleton, all deployed to GitHub Pages:
 
 | Repo | Subject | Notable |
 |---|---|---|
-| [`scrolly-wealth`](https://github.com/kpclick12/scrolly-wealth) | global wealth inequality | interactive wheel game + "where do you stand" explorer, GSAP, linked bar/pictogram pyramid, standalone share-chart generator, per-figure provenance flags |
+| [`scrolly-wealth`](https://github.com/kpclick12/scrolly-wealth) — `plainx.dev/posts/the-birth-lottery` | global wealth inequality | interactive wheel game + "where do you stand" explorer, GSAP, linked bar/pictogram pyramid, standalone share-chart generator, per-figure provenance flags |
 | [`scrolly-butterflyeffect`](https://github.com/kpclick12/scrolly-butterflyeffect) | chaos theory → European extreme weather | Three.js meadow→storm hero with a custom grass shader |
 | [`scrolly-monopoly`](https://github.com/kpclick12/scrolly-monopoly) | Swedish housing market, in Swedish | Three.js Monopoly board that extrudes into a price skyline |
 
@@ -18,6 +18,63 @@ skeleton, all deployed to GitHub Pages:
 implementation, not this document. `scrolly-monopoly` is the newest and the
 cleanest starting point for structure; `scrolly-wealth` is the reference for
 full-bleed mobile cards, palette validation and sourcing discipline.
+
+## Start here — plan before writing any code
+
+**Do not scaffold a project until the conceit is agreed.** The most expensive
+mistake in this format is building five acts of charts around an analogy that
+runs out halfway. Open with a short written plan and get a yes on it:
+
+1. **The one thing.** In one sentence: what should the reader still know a week
+   later? If it takes two sentences, the piece isn't ready.
+2. **The conceit.** Which familiar thing are we explaining this through? (See
+   below — this is the core of the format, not decoration.)
+3. **The mapping.** Table it: each part of the analogy against what it stands
+   for in the real subject. **Include the rows where it doesn't map** — those
+   are usually the best beats in the finished piece.
+4. **The movements.** What are the phases of the story, and what does the
+   visual *do* in each one? One persistent visual per movement, doing something
+   as the reader scrolls. If a movement has no visual that changes, it's prose,
+   not a movement — cut it or merge it.
+5. **The data.** What do we actually have, and is it enough to make each visual
+   move? Thin data is the usual reason a movement collapses into a bare fact.
+6. **The cut list.** Name three interesting things that will *not* be in the
+   piece. If nothing is on this list, the piece will be a fact dump.
+
+Keep the plan short — a screenful. Then build.
+
+## The conceit — explain the subject through something already known
+
+This is the house method, and it is what makes these pieces work. Every one of
+them explains a real subject through something the reader already understands
+in their body: a board game, a scientific result, a fable, a film, a piece of
+pop culture.
+
+- `scrolly-monopoly` — the Swedish housing market **as a game of Monopoly**
+- `scrolly-butterflyeffect` — European climate extremes **through the butterfly
+  effect and Lorenz's 1963 experiment**
+- `scrolly-wealth` — global wealth **through a five-person island parable**
+
+Rules for picking and using one:
+
+- **Pick something genuinely familiar**, not clever. The point is to borrow a
+  mental model the reader already has, for free. If you have to explain the
+  analogy first, it isn't one.
+- **It must supply the shape of the argument, not just the hero image.** Test:
+  if you deleted every mention of the analogy, would the piece still be
+  organized the same way? If yes, it's decoration — the conceit isn't doing
+  the work.
+- **One conceit per piece.** Don't stack metaphors; a second one cancels the
+  first.
+- **Name where it breaks.** The moment the analogy stops fitting is almost
+  always the strongest beat available. `scrolly-monopoly` ends on exactly this:
+  a board game ends when the last player goes bankrupt, and a country doesn't
+  have that option. Plan for that moment; don't stumble into it.
+- **The analogy must not do the arguing.** It organizes and it delights; the
+  data still has to hold up on its own. If a claim only sounds true inside the
+  metaphor, cut the claim.
+- Weave it through — the conceit shows up in act names, kickers, callout
+  labels and the closing. It shouldn't appear in the hero and then vanish.
 
 ## Using this alongside a brand or house-style skill
 
@@ -315,6 +372,27 @@ const showEurope = $derived(step >= 1);   // step gates progressive reveal
   assign lanes in priority order so the marks that carry the point get the clear
   lane, and put it in one shared helper.
 
+### When two marks land on the same point, merge them — don't nudge
+
+An interactive chart's default state is the one every reader sees, so it is
+worth more care than any other. The explorer's slider defaults to the selected
+country's median, which put the "you" marker and the "typical adult" marker on
+the identical point: two dots drawn on top of each other, so one was simply
+invisible and it read as a failed render.
+
+Nudging them apart hides the coincidence; naming it says something. Below a
+threshold in measured pixels the two collapse into a single marker whose label
+states the overlap ("YOU — also the typical adult"), with the two colours
+combined on one dot so it still carries both identities. Standing exactly where
+the typical adult stands is the clearest thing that axis can say.
+
+Two traps found doing it. A merged label is the longest one the chart will ever
+show, so it clips off a narrow card unless you shorten it — drop anything the
+surrounding prose already says. And **do not let it wrap**: a marker is a
+zero-width absolutely positioned anchor, so `white-space: normal` gives the
+label no width to wrap against and it collapses to one word per line, climbing
+into the tier above. One line, short enough to fit, is the working answer.
+
 ### Extract to `lib/actions/` on the second use
 
 Charts in this format keep needing the same handful of behaviours: measure a
@@ -337,7 +415,22 @@ component that has its own copy.
 
 ## Writing the story
 
-Five acts. Four to six steps per act. Each act:
+**Let the conceit set the structure.** The three existing pieces all landed on
+five acts of four to six steps, but that's a coincidence of their subjects, not
+a rule — it's roughly what a board game or a fable breaks into. Three long
+movements is fine. So is seven short ones. So is one act that's a single
+interactive piece rather than a scroll.
+
+What is structural: one section = one `Scrolly` = one visual that persists
+across its steps. Beyond that, vary it. A piece where every act has the same
+rhythm — head, five cards, big number, handover — reads as a template by the
+third act, and the reader starts skimming.
+
+Ways to break the pattern deliberately: a short act of two steps; an act whose
+visual is an interactive toy instead of a chart; a full-bleed quote or image
+between acts; a step card that's one sentence with no number in it at all.
+
+The default act head:
 
 ```svelte
 <div class="act-head">
@@ -379,14 +472,42 @@ redistributed and destroyed before a single chart appears.
 
 End the last step of each act with a line that hands over to the next one.
 
+### Keep it light — this is the hard one
+
+The failure mode of this format is a wall of well-sourced facts. Research turns
+up forty interesting numbers and all forty want to be on the page. They can't
+be. A reader leaves with **one** thing; every extra fact competes with it.
+
+- **One idea per step card.** Two numbers in a card means it's two cards, or
+  one of them goes. Usually one of them goes.
+- **Most of what you researched doesn't ship.** The sources section is for
+  citations, not a graveyard for surplus findings. Cut them, or hide them in a
+  chart tooltip where the curious can find them.
+- **Not every card needs a callout number.** Alternating is what makes a big
+  number land; four in a row makes all four disappear.
+- **A card can be one sentence.** Give the reader a moment to breathe after a
+  dense one.
+- **Every few steps, something other than a fact**: a turn in the analogy, a
+  question, a small surprise, a visual that does something unexpected. If you
+  scroll a whole act and nothing happens except numbers arriving, it's a
+  report.
+- **Trust the visual.** If the chart already shows it, the prose doesn't need
+  to restate it — say what it *means* instead.
+
+**Playful, not gamified.** The lightness comes from the conceit, the writing
+and the timing of a reveal — a wry line, a visual that turns out to be
+something else, an analogy pushed one step further than expected. It does not
+come from points, badges, scores, quizzes or rewards. `scrolly-wealth`'s spin
+the-wheel and `scrolly-monopoly`'s board are playful because they *are* the
+argument made touchable, not because they score you.
+
 ### The tone
 
 **Default — a voice or plain-language skill overrides all of this.** Explain a
-mechanism; don't lecture and don't advise. Reach for a concrete parable and
-stay inside it — the five-person island, the Monopoly board, one butterfly.
-Close with the idea, not a summary: `App.svelte`'s closing section is a dark
-full-bleed band with a single argument in it. A piece that stops at its last
-widget reads as though it ran out of budget.
+mechanism; don't lecture and don't advise. Stay inside the conceit. Close with
+the idea, not a summary: `App.svelte`'s closing section is a dark full-bleed
+band with a single argument in it. A piece that stops at its last widget reads
+as though it ran out of budget.
 
 Under a klarspråk / myndighetssvenska standard, expect the voice to change and
 let it: plainer sentences, no rhetorical build, terminology fixed by the
@@ -450,6 +571,30 @@ had already shipped. These are the rules that came out of it:
 - **A half-updated dataset is worse than a consistent old one.** If a refresh
   can only cover some markets, either finish it or leave the old figures with
   honest labels. Say which you did.
+- **Never divide a sourced number by an unsourced one.** The wheel showed "odds
+  of being a dollar-millionaire" as a rate per 100 adults — a published
+  millionaire count over an adult population nobody had sourced. China came out
+  three times too generous, Japan about 1.5x. The publisher printed the counts
+  themselves, and its own world total, so showing the count and its share of
+  that total removed every invented denominator. When a derived metric tempts
+  you, check whether the source already publishes something that makes the
+  point without the arithmetic.
+- **Mixed vintages: the line is what you claim, not how tidy it looks.** Two
+  editions across two charts is fine when the claim is order of magnitude — a
+  hundredfold gap between two countries survives a three-year difference. It is
+  not fine inside a ranking or a like-for-like comparison, where a vintage
+  difference can reorder the bars. Decide which kind of claim you are making,
+  then say so.
+- **Define the central term on the page.** A reader asked whether the piece was
+  mixing "wealth" and "net worth" — it wasn't, they are the same thing in the
+  source, but nothing on the page said so. If your subject has a term with a
+  technical definition, put one sentence in the methodology stating it. Being
+  right is not the same as being visibly right.
+- **Know which document tier holds what.** A publisher's media release, its full
+  report and its databook are different documents with different coverage: the
+  first two here both printed only a top-30 table, while the per-country detail
+  everyone wants lives in the databook. Chasing the wrong tier wastes a lot of
+  time — check what each one actually contains before hunting.
 
 ## The 3D hero (optional)
 
@@ -512,6 +657,34 @@ most link scrapers, and that is the usual reason a shared link shows no
 picture. 1200×630 PNG in `public/`. Also set `og:image:alt`, `og:locale`,
 `twitter:card=summary_large_image`, and a `<link rel="canonical">`.
 
+### When a site serves the piece at its own path
+
+The personal site (`kpclick12/website`, Next.js on `plainx.dev`) does not host a
+copy: it **proxies** the Pages deployment through a rewrite, so one build is
+reachable at two URLs. Publishing a piece there is a registry entry in
+`lib/posts.ts` plus a rewrite pair in `next.config.mjs`.
+
+- **Decide the slug before finishing the build.** `canonical` and `og:url` need
+  it, so not knowing it means deploying once with the wrong address and fixing
+  it in a second pass. The slug is title-based (`the-birth-lottery`), not the
+  repo name.
+- **The vite `base` does not change.** The site's second rewrite maps
+  `/<repo>/:path*` to the origin, so the asset prefix the build bakes in
+  resolves on the domain too, and the piece keeps working standalone. Changing
+  the base to match the site path would break the standalone copy for no gain.
+- **`canonical` points at the site; `og:url` matches the URL the piece is
+  actually shared with.** Canonical decides which of the two URLs search
+  engines treat as authoritative, and that should be the site — otherwise the
+  origin competes with, and outranks, your own page. `og:url` is about social
+  cards, so a piece already shared under the origin URL keeps that value, while
+  a new piece shared under the site URL uses the site. Same principle, two
+  values; write the reason in a comment or it looks like an inconsistency later.
+- **Changing `canonical` breaks nothing for existing links.** It is a hint to
+  crawlers, not a redirect. Old shared links keep working exactly as before.
+- **Deploy the piece before adding the site route.** The rewrite proxies the
+  origin, so the site path 404s until the origin is live. Load the origin URL
+  and confirm it renders first.
+
 ## Sharing the piece
 
 The distribution lesson is as valuable as any code here: on feed-based
@@ -557,6 +730,10 @@ phone's usable area, which is how a whole class of mobile bug shipped twice.
 Assemble same-size shots into a strip when checking uniformity; drift is
 obvious side by side and invisible one at a time.
 
+- Read it end to end as a reader, not as the author. Does the conceit still
+  carry at act four, or did it quietly become a normal chart deck?
+- Could you cut three more facts and lose nothing? Cut them.
+- Does one thing stand out, or does everything weigh the same?
 - **No horizontal scrollbar at any width.** Verify it programmatically rather
   than by eye: assert `document.documentElement.scrollWidth <=
   window.innerWidth` at 320, 360, 375, 390 and 412px, and when it fails, walk
@@ -579,6 +756,13 @@ obvious side by side and invisible one at a time.
 - Tab through it — `:focus-visible` rings are visible on both the light paper
   and the always-dark sections (the dark sections override to a light ring).
 - Charts announce themselves usefully to a screen reader.
+- **Live regions must already be in the DOM before their content changes.** The
+  wheel's result card carried `role="status"` and `aria-live="polite"` but only
+  existed after a spin, and a region inserted alongside its own text is usually
+  not announced — screen readers watch regions that already exist. Wrap the
+  placeholder and the result in one always-present region so the result is a
+  *change* to it. Counting `[aria-live]` elements on the page catches this: the
+  count was zero when it looked correct in the markup.
 - Reduced motion set: nothing spins, nothing loops, the story still works.
 - Dark mode: no surface goes brown/muddy; every palette re-validated; every
   always-dark section's own text colors checked, not assumed.
@@ -586,3 +770,12 @@ obvious side by side and invisible one at a time.
   in `scrolly-wealth` for several commits because nobody looked.
 - Every number on the page traces to a line in the sources section, and every
   number's vintage is visible where the number is.
+
+Keep this as a **script, not a checklist you re-perform by hand**. One Playwright
+file that loads the built site, scrolls the whole page, and asserts the lot —
+overflow across 320/360/375/390/412/768/1280, zero console errors at each,
+a regex per key figure and section so a data change can't silently drop one,
+exactly one `h1`, no image missing `alt`, a non-zero `[aria-live]` count, and
+that the page still reads with `reducedMotion: 'reduce'` — runs in under two
+minutes and prints one PASS/FAIL line per check. It is the difference between
+believing the piece is fine and knowing it.
