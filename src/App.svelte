@@ -231,6 +231,9 @@
     number here matters more than the rest, it's this: almost none of it
     was up to you.
   </p>
+  <p class="footer-home">
+    <a href="https://plainx.dev/">More stories at (<i>x</i>)plain</a>
+  </p>
 </footer>
 
 <style>
@@ -416,5 +419,26 @@
   footer p {
     max-width: 480px;
     margin: 0 auto;
+  }
+
+  /* Way back to the site. The piece is served at plainx.dev/posts/the-birth-lottery,
+     which carries no site chrome of its own. Absolute URL on purpose: a relative
+     "/" would land on the GitHub Pages root at the build host.
+
+     Footer only, deliberately — a pinned chip was tried on the sister piece and
+     covered chart titles on narrow screens. */
+  .footer-home {
+    margin-top: 18px;
+  }
+  .footer-home a {
+    color: var(--text-muted);
+    text-decoration-color: var(--border);
+    text-underline-offset: 3px;
+  }
+  .footer-home a:hover {
+    color: var(--text-primary);
+  }
+  .footer-home i {
+    font-style: italic;
   }
 </style>
