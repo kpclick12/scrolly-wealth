@@ -223,9 +223,15 @@
           {spinning ? "Spinning…" : history.length ? "Spin again" : "Spin the wheel"}
         </button>
 
+        <!-- The live region wraps both states and is always in the DOM. A
+             region that appears at the same moment as its content is
+             unreliable: screen readers watch existing live regions for
+             changes, so one inserted alongside its own text often goes
+             unannounced. -->
+        <div class="result-region" role="status" aria-live="polite">
         {#if resultEntry}
           {@const e = resultEntry}
-          <div class="result-card" role="status" aria-live="polite">
+          <div class="result-card">
             <p class="result-kicker">You were born in</p>
             <h3 class="result-name">{e.name}{e.type === "region" ? " (regional average)" : ""}</h3>
             <p class="result-share">{e.birthShare}% of the world's babies are born here</p>
@@ -283,6 +289,7 @@
             <p>Spin to find out where the birth lottery sends you.</p>
           </div>
         {/if}
+        </div>
 
         {#if history.length}
           <div class="tally">

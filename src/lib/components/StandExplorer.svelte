@@ -369,7 +369,9 @@
       </div>
     </div>
 
-    <div class="result-card">
+    <!-- Always present, so changes to the readout below are announced as the
+         reader moves the slider or picks another country. -->
+    <div class="result-card" role="status" aria-live="polite">
       <p class="result-line percentile-line">
         {#if pct.clampedHigh}
           You're in the world's <strong>top 0.1%</strong> by net wealth.
