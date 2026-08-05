@@ -8,7 +8,7 @@ and within countries, and closes with two interactive pieces — a spin-the-
 wheel game weighted by real shares of world births, and a "where do you
 stand" wealth explorer.
 
-Live: https://kpclick12.github.io/scrolly-wealth/
+Live: https://plainx.dev/posts/the-birth-lottery
 
 ## Tech stack
 
